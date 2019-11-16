@@ -35,7 +35,8 @@ logstash:
   host: localhost
   port: 5044
 
-heartbeat_service_name: heartbeat
+#heartbeat_service_name: heartbeat
+heartbeat_service_name: heartbeat-elastic
 heartbeat_bulk_max_size: 500
 heartbeat_worker: 1
 heartbeat_logging_to_syslog: false
