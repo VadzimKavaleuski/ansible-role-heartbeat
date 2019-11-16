@@ -1,2 +1,17 @@
 ---
-# handlers file for heartbeat
+# handlers file for ansible-role-heartbeat
+- name: Reload systemd configuration
+  systemd:
+    daemon_reload: true
+  become: true
+
+- name: Restart heartbeat
+  service:
+    name: '{{ heartbeat_service_name }}'
+    state: restarted
+  become: true
+
+- name: Restart heartbeat win
+  win_service:
+    name: '{{ heartbeat_service_name }}'
+    state: restarted
