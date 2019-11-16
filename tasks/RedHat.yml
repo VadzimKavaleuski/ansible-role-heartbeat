@@ -1,8 +1,8 @@
 ---
 - name: Set heartbeat version if defined
-  set_fact:
-    mb_package_name: '{{ mb_package_name }}-{{ heartbeat_version }}'
-  when: heartbeat_version.find('.x') == -1
+#  set_fact:
+#    mb_package_name: '{{ mb_package_name }}-{{ heartbeat_version }}'
+#  when: heartbeat_version.find('.x') == -1
 
 - block:
     - name: Importing latest logstash GPG Key
@@ -25,8 +25,8 @@
 
     - name: Redhat - Installing heartbeat package
       yum:
-        name: 'heartbeat-elastic'
-#        name: '{{ mb_package_name }}'
+#        name: 'heartbeat-elastic'
+        name: '{{ mb_package_name }}-elastic'
         state: present
         update_cache: true
       register: installed_package
