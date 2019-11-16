@@ -40,7 +40,7 @@
         state: directory
 
 # enable service
-    - name: enable service httpd and ensure it is not masked
+    - name: Enable service heartbeat-elastic
       systemd:
         name: heartbeat-elastic
         enabled: yes
