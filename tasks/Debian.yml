@@ -40,7 +40,12 @@
         state: directory
 
 # enable service
-    - name: Enable service heartbeat-elastic
-      command: update-rc.d heartbeat-elastic defaults 95 10
+    - name: enable service httpd and ensure it is not masked
+      systemd:
+        name: heartbeat-elastic
+        enabled: yes
+        masked: no
+#    - name: Enable service heartbeat-elastic
+#      command: update-rc.d heartbeat-elastic defaults 95 10
 
   become: true
