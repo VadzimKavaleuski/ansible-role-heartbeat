@@ -10,3 +10,26 @@ galaxy_info:
   platforms: [{name: [EL], versions: [7]}]
   galaxy_tags: [development, system]
 dependencies: []
+
+platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Debian
+      versions:
+        - stretch
+    - name: "Amazon"
+      versions:
+        - "all"
+
+  galaxy_tags:
+    - heartbeat
+    - elasticsearch
+    - elk
+    - logging
+    - monitoring
+    - system
