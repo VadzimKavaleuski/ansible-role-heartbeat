@@ -37,6 +37,7 @@ logstash:
 
 #heartbeat_service_name: heartbeat
 heartbeat_service_name: heartbeat-elastic
+heartbeat_cfg_file_name: heartbeat
 heartbeat_bulk_max_size: 500
 heartbeat_worker: 1
 heartbeat_logging_to_syslog: false
