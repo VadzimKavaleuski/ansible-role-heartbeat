@@ -28,7 +28,7 @@
     - name: Install heartbeat
       apt:
 #        name: '{{ mb_package_name }}'
-        name: 'heartbeat-elastic'
+        name: '{{ mb_package_name }}-elastic'
         state: present
       register: installed_package
       until: installed_package is succeeded
@@ -39,3 +39,6 @@
         path: /usr/lib/systemd/system
         state: directory
   become: true
+# enable service
+    - name: Enable service heartbeat-elastic
+      command: update-rc.d heartbeat-elastic defaults 95 10
