@@ -41,15 +41,15 @@
 
 - name: Templating heartbeat configuration
   win_template:
-    src: '{{ mb_path_file.src }}'
-    dest: '{{ mb_path_file.dst }}'
+    src: '{{ hb_path_file.src }}'
+    dest: '{{ hb_path_file.dst }}'
   loop:
     - src: heartbeat.yml.j2
       dst: '{{ path.config }}\heartbeat.yml'
     - src: heartbeat-template.bat.j2
       dst: '{{ path.home }}\heartbeat.bat'
   loop_control:
-    loop_var: mb_path_file
+    loop_var: hb_path_file
   notify: Restart heartbeat win
 
 - name: Install nssm

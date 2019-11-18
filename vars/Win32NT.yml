@@ -1,9 +1,9 @@
 ---
 default:
-  mb_home: C:\program files\heartbeat
-  mb_log_dir: C:\program files\heartbeat\logs
-  mb_conf_dir: C:\program files\heartbeat
-  mb_data_dir: C:\program files\heartbeat\data
+  hb_home: C:\program files\heartbeat
+  hb_log_dir: C:\program files\heartbeat\logs
+  hb_conf_dir: C:\program files\heartbeat
+  hb_data_dir: C:\program files\heartbeat\data
 
 default_ssl:
   key: c:\tls\private\server.key

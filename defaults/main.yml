@@ -1,24 +1,24 @@
 ---
 elastic_branch: 7
-heartbeat_version: '{{ mb_major_version }}'
+heartbeat_version: '{{ hb_major_version }}'
 heartbeat_last_version: 7.3.0
 heartbeat_find_last_version: false
 elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-es_repo_file: 'elastic-{{ mb_major_version }}'
+es_repo_file: 'elastic-{{ hb_major_version }}'
 es_apt_url: 'deb https://artifacts.elastic.co/packages/{{ es_repo_name }}/apt stable main'
 es_yum_url: 'https://artifacts.elastic.co/packages/{{ es_repo_name }}/yum'
 es_use_oss_version: true
 heartbeat_node_name: '{{ inventory_hostname }}'
 heartbeat_ssl_enabled: false
 
-mb_home: '{{ default["mb_home"] }}'
-mb_log_dir: '{{ default["mb_log_dir"] }}'
-mb_conf_dir: '{{ default["mb_conf_dir"] }}'
-mb_data_dir: '{{ default["mb_data_dir"] }}'
+hb_home: '{{ default["hb_home"] }}'
+hb_log_dir: '{{ default["hb_log_dir"] }}'
+hb_conf_dir: '{{ default["hb_conf_dir"] }}'
+hb_data_dir: '{{ default["hb_data_dir"] }}'
 
-mb_ssl_key: '{{ default_ssl["key"] }}'
-mb_ssl_certificate: '{{ default_ssl["certificate"] }}'
-mb_ssl_certificate_authorities: '{{ default_ssl["certificate_authorities"] }}'
+hb_ssl_key: '{{ default_ssl["key"] }}'
+hb_ssl_certificate: '{{ default_ssl["certificate"] }}'
+hb_ssl_certificate_authorities: '{{ default_ssl["certificate_authorities"] }}'
 
 win_download_path: '{{ ansible_env.TEMP }}/heartbeat'
 

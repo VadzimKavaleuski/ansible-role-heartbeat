@@ -16,7 +16,7 @@
       with_dict: '{{ path }}'
       loop_control:
         loop_var: path_folder
-      notify: '{{ mb_service_handlers }}'
+      notify: '{{ hb_service_handlers }}'
 
     - name: Copy Configuration File
       template:
@@ -25,15 +25,15 @@
         owner: root
         group: root
         mode: 0644
-      notify: '{{ mb_service_handlers }}'
+      notify: '{{ hb_service_handlers }}'
 
     - name: Copy service configuration file
       template:
-        src: '{{ mb_service_script }}.j2'
-        dest: '{{ mb_service_path }}/{{ mb_service_script }}'
-        mode: '{{ mb_service_script_mode }}'
+        src: '{{ hb_service_script }}.j2'
+        dest: '{{ hb_service_path }}/{{ hb_service_script }}'
+        mode: '{{ hb_service_script_mode }}'
         force: true
-      notify: '{{ mb_service_handlers }}'
+      notify: '{{ hb_service_handlers }}'
 
     - name: Start heartbeat
       service:
