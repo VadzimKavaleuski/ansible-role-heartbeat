@@ -19,11 +19,13 @@
       register: add_gpg_key
       until: add_gpg_key is succeeded
 
-#    - name: Add Beats repository
-#      apt_repository:
-#        repo: '{{ es_apt_url }}'
-#        state: present
-#        update_cache: true
+    - name: Add Beats repository
+      apt_repository:
+        repo: '{{ es_apt_url }}'
+        state: present
+        update_cache: true
+
+        
 #      register: beast_repo_append
 #      until: installed_package is succeeded
 
