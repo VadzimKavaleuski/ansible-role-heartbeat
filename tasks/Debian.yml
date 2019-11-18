@@ -24,8 +24,8 @@
         repo: '{{ es_apt_url }}'
         state: present
         update_cache: true
-      register: beast_repo_append
-      until: installed_package is succeeded
+#      register: beast_repo_append
+#      until: installed_package is succeeded
 
     - name: Install heartbeat
       apt:
