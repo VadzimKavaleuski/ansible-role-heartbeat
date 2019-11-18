@@ -37,7 +37,7 @@
 
     - name: Start heartbeat
       service:
-        name: heartbeat
+        name: heartbeat-elastic
         state: started
         enabled: true
   become: true
