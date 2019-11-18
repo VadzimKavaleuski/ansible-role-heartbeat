@@ -30,7 +30,7 @@ Lint:
   tags:
     - lint
 
-Docker heartbeat:
+.Docker heartbeat:
   stage: deployment test
   script:
     - molecule test -s default
@@ -46,7 +46,7 @@ AWS heartbeat:
   tags:
     - aws
 
-AZURE heartbeat:
+.AZURE heartbeat:
   stage: deployment test
   script:
     - molecule test -s cloud-azure-direct
