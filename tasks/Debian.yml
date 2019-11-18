@@ -43,8 +43,8 @@
     - name: Enable service heartbeat-elastic
       systemd:
         name: heartbeat-elastic
+        state: started
         enabled: yes
-        masked: no
 #    - name: Enable service heartbeat-elastic
 #      command: update-rc.d heartbeat-elastic defaults 95 10
 
