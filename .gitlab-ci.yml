@@ -53,7 +53,7 @@ AZURE heartbeat:
   tags:
     - azure
 
-EPC heartbeat:
+.EPC heartbeat:
   variables:
     EPC_REGION: EPAM-BY2
   stage: deployment test

@@ -24,8 +24,6 @@
         repo: '{{ es_apt_url }}'
         state: present
         update_cache: true
-#      register: beast_repo_append
-#      until: installed_package is succeeded
 
     - name: Install heartbeat
       apt:
@@ -39,6 +37,5 @@
       file:
         path: /usr/lib/systemd/system
         state: directory
-#      register: config_directory_created
-#      until: config_directory_created is succeeded
+
   become: true
