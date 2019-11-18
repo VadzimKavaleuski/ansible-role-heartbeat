@@ -27,18 +27,18 @@
       register: beast_repo_append
       until: installed_package is succeeded
 
-#    - name: Install heartbeat
-#      apt:
-#        name: '{{ mb_package_name }}-elastic'
-#        state: present
-#      register: installed_package
-#      until: installed_package is succeeded
-#      notify: '{{ mb_service_handlers }}'
+    - name: Install heartbeat
+      apt:
+        name: '{{ mb_package_name }}-elastic'
+        state: present
+      register: installed_package
+      until: installed_package is succeeded
+      notify: '{{ mb_service_handlers }}'
 
-#    - name: Create folder path for service script
-#      file:
-#        path: /usr/lib/systemd/system
-#        state: directory
+    - name: Create folder path for service script
+      file:
+        path: /usr/lib/systemd/system
+        state: directory
 #      register: config_directory_created
 #      until: config_directory_created is succeeded
   become: true
