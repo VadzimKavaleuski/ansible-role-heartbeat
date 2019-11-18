@@ -40,11 +40,11 @@
         state: directory
 
 # enable service
-    - name: Enable service heartbeat-elastic
-      systemd:
-        name: heartbeat-elastic
-        state: started
-        enabled: yes
+#    - name: Enable service heartbeat-elastic
+#      systemd:
+#        name: heartbeat-elastic
+#        state: started
+#        enabled: yes
 #    - name: Enable service heartbeat-elastic
 #      command: update-rc.d heartbeat-elastic defaults 95 10
 
