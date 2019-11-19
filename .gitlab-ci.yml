@@ -53,11 +53,11 @@ AZURE heartbeat:
   tags:
     - azure
 
-.EPC heartbeat:
-  variables:
-    EPC_REGION: EPAM-BY2
-  stage: deployment test
-  script:
-    - molecule test -s cloud-epc-delegated
-  tags:
-    - delegated
+# EPC heartbeat:
+#   variables:
+#     EPC_REGION: EPAM-BY2
+#   stage: deployment test
+#   script:
+#     - molecule test -s cloud-epc-delegated
+#   tags:
+#     - delegated
