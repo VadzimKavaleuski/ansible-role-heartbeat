@@ -37,7 +37,7 @@
 
     - name: Start heartbeat
       service:
-        name: heartbeat-elastic
+        name:  '{{ heartbeat_package_name }}'
         state: started
         enabled: true
   become: true

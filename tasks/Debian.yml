@@ -27,7 +27,7 @@
 
     - name: Install heartbeat
       apt:
-        name: '{{ hb_package_name }}-elastic'
+        name: '{{ heartbeat_package_name }}'
         state: present
       register: installed_package
       until: installed_package is succeeded

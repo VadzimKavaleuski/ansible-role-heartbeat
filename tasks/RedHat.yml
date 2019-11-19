@@ -25,7 +25,7 @@
 
     - name: Redhat - Installing heartbeat package
       yum:
-        name: '{{ hb_package_name }}-elastic'
+        name:  '{{ heartbeat_package_name }}'
         state: present
         update_cache: true
       register: installed_package
