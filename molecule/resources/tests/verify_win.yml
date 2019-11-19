@@ -5,7 +5,7 @@
   tasks:
     - name: Check if a service is installed
       win_service:
-        name: heartbeat-elastic
+        name: heartbeat
       register: hb_service_info
 
     - name: Check heartbeat version
