@@ -36,8 +36,8 @@ logstash:
   port: 5044
 
 heartbeat_name: heartbeat
-heartbeat_service_name: '{{ heartbeat_name }}'
-heartbeat_package_name: '{{ heartbeat_name }}'
+heartbeat_service_name: '{{ heartbeat_name }}-elastic'
+heartbeat_package_name: '{{ heartbeat_name }}-elastic'
 heartbeat_cfg_file_name: '{{ heartbeat_name }}'
 heartbeat_bulk_max_size: 500
 heartbeat_worker: 1

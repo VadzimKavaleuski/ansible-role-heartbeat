@@ -12,11 +12,11 @@
 
   - name: Assert that heartbeat package is installed
     assert:
-      that: ansible_facts.packages['heartbeat']
+      that: ansible_facts.packages['heartbeat-elastic']
 
   - name: Assert that heartbeat service is running
     assert:
       that: |
               "'running' in ansible_facts.services['heartbeat.service'].state"
               or
-              "'running' in ansible_facts.services['heartbeat'].state"
+              "'running' in ansible_facts.services['heartbeat-elastic'].state"
