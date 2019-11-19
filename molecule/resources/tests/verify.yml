@@ -7,16 +7,16 @@
   # - name: Example assertion
   #   assert:
   #     that: true
-    - name: Gather the package facts
-      package_facts:
+  - name: Gather the package facts
+    package_facts:
         manager: auto
 
     - name: Populate service facts
       service_facts:
 
     - name: Assert that heartbeat package is installed
-        assert:
-          that: ansible_facts.packages['heartbeat-elastic']
+      assert:
+        that: ansible_facts.packages['heartbeat-elastic']
 
     # - name: Assert that heartbeat service is running
     #   assert:
