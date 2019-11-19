@@ -11,7 +11,7 @@
       service_facts:
 
     - name: Assert that heartbeat package is installed
-      assert:
+        assert:
         that: ansible_facts.packages['heartbeat']
 
     - name: Assert that heartbeat service is running
