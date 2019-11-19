@@ -1,7 +1,7 @@
 ---
 elastic_branch: 7
 heartbeat_version: '{{ hb_major_version }}'
-heartbeat_last_version: 7.3.0
+heartbeat_last_version: 7.4.1
 heartbeat_find_last_version: false
 elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 es_repo_file: 'elastic-{{ hb_major_version }}'
@@ -37,7 +37,7 @@ logstash:
 
 heartbeat_name: heartbeat
 heartbeat_service_name: '{{ heartbeat_name }}'
-heartbeat_package_name: '{{ heartbeat_name }}-elastic'
+heartbeat_package_name: '{{ heartbeat_name }}'
 heartbeat_cfg_file_name: '{{ heartbeat_name }}'
 heartbeat_bulk_max_size: 500
 heartbeat_worker: 1
