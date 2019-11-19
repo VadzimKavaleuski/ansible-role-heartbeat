@@ -16,7 +16,6 @@
 
   - name: Assert that heartbeat service is running
     assert:
-      # that: "'running' in ansible_facts.services['heartbeat.service'].state or 'running' in ansible_facts.services['heartbeat-elastic'].state"
       that: |
               "'running' in ansible_facts.services['heartbeat.service'].state"
               or
