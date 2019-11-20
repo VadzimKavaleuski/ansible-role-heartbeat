@@ -49,7 +49,7 @@ You can override any variable below by setting "variable: value" in playbook.
 
 
 - `heartbeat_version`
-Is used to select main Heartbeat branch to be installed (5.x or 6.x current stable versions). Default value is `7`.
+Is used to select main Heartbeat branch to be installed (5.x, 6.x or 7.x current stable versions). Default value is `7`.
 - `heartbeat_last_version`
 Is used to select specific Heartbeat version to be installed. Default value is `7.4.1`
 - `elastic_gpg_key`
