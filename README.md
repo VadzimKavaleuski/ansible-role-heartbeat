@@ -4,8 +4,8 @@ Heartbeat Role
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-heartbeat.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-heartbeat)
 [![Build Status](https://gitlab.com/lean-delivery/ansible-role-heartbeat/badges/master/pipeline.svg)](https://gitlab.com/lean-delivery/ansible-role-heartbeat/pipelines)
 [![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.heartbeat-blue.svg)](https://galaxy.ansible.com/lean_delivery/heartbeat)
-![Ansible](https://img.shields.io/ansible/role/d/44667.svg)
-![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F44667%2F&query=$.min_ansible_version)
+![Ansible](https://img.shields.io/ansible/role/d/44766.svg)
+![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F44766%2F&query=$.min_ansible_version)
 
 
 ## Summary
@@ -159,7 +159,7 @@ Example Playbook
 ----------------
 
 
-### Installing Heartbeat 6.x version:
+### Installing Heartbeat 7.x version:
 
 
 ```yaml
@@ -168,7 +168,7 @@ Example Playbook
   roles:
     - role: ansible-role-heartbeat
 ```
-### Installing Heartbeat 6.x version with custom elasticsearch output:
+### Installing Heartbeat 7.x version with custom elasticsearch output:
 
 
 ```yaml
