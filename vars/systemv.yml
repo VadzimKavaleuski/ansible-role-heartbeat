@@ -1,5 +1,4 @@
 ---
-#hb_service_script: '{{ heartbeat_service_name }}'
 hb_service_script: '{{ heartbeat_cfg_file_name }}'
 hb_service_path: /etc/init.d
 hb_service_script_mode: 0755
