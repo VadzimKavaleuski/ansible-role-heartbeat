@@ -1,0 +1,22 @@
+---
+# Ansible tests for Windows.
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Check if a service is installed
+      win_service:
+        name: heartbeat-elastic
+      register: hb_service_info
+
+    - name: Check heartbeat version
+      win_command: heartbeat version
+      register: heartbeat_ver
+      changed_when: false
+
+    - name: Debug heartbeat version
+      debug:
+        var: heartbeat_ver.stdout
+
+    - name: Assert that heartbeat package is installed
+      assert:
+        that: "'running' in hb_service_info.state"

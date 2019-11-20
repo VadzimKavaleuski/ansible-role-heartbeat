@@ -1,0 +1,41 @@
+---
+- name: Set heartbeat version if defined
+  set_fact:
+    hb_package_name: '{{ hb_package_name }}={{ heartbeat_version }}'
+  when: heartbeat_version.find('.x') == -1
+
+- block:
+    - name: Install dependency for Debian
+      apt:
+        name: apt-transport-https
+        state: present
+      register: debian_dependency
+      until: debian_dependency is succeeded
+
+    - name: Add elasticsearch apt key
+      apt_key:
+        url: '{{ elastic_gpg_key }}'
+        state: present
+      register: add_gpg_key
+      until: add_gpg_key is succeeded
+
+    - name: Add Beats repository
+      apt_repository:
+        repo: '{{ es_apt_url }}'
+        state: present
+        update_cache: true
+
+    - name: Install heartbeat
+      apt:
+        name: '{{ heartbeat_package_name }}'
+        state: present
+      register: installed_package
+      until: installed_package is succeeded
+      notify: '{{ hb_service_handlers }}'
+
+    - name: Create folder path for service script
+      file:
+        path: /usr/lib/systemd/system
+        state: directory
+
+  become: true
