@@ -7,6 +7,7 @@ elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 es_repo_file: 'elastic-{{ hb_major_version }}'
 es_apt_url: 'deb https://artifacts.elastic.co/packages/{{ es_repo_name }}/apt stable main'
 es_yum_url: 'https://artifacts.elastic.co/packages/{{ es_repo_name }}/yum'
+es_win_url: 'https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-{{ heartbeat_version }}-windows-x86_64.zip'
 es_use_oss_version: true
 heartbeat_node_name: '{{ inventory_hostname }}'
 heartbeat_ssl_enabled: false
@@ -21,8 +22,6 @@ hb_ssl_certificate: '{{ default_ssl["certificate"] }}'
 hb_ssl_certificate_authorities: '{{ default_ssl["certificate_authorities"] }}'
 
 win_download_path: '{{ ansible_env.TEMP }}/heartbeat'
-
-input_logpath: '{{ default_logpath }}'
 
 #output customization:
 heartbeat_output: elasticsearch

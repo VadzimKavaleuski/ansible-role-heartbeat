@@ -1,4 +1,4 @@
-###################### heartbeat Configuration Example #######################
+###################### Heartbeat Configuration Example #######################
 
 # This file is an example configuration file highlighting only the most common
 # options. The heartbeat.reference.yml file from the same directory contains all the
@@ -22,15 +22,15 @@ heartbeat.config.modules:
 #==================== Elasticsearch template setting ==========================
 
 setup.template.settings:
-  index.number_of_shards: 1
-  index.codec: best_compression
+  index.number_of_shards: 3
+  #index.codec: best_compression
   #_source.enabled: false
 
 #================================ General =====================================
 
 # The name of the shipper that publishes the network data. It can be used to group
 # all the transactions sent by a single shipper in the web interface.
-#name:
+name: "{{ heartbeat_node_name }}"
 
 # The tags of the shipper are included in their own field with each
 # transaction published.
@@ -73,7 +73,7 @@ setup.kibana:
 
 #============================= Elastic Cloud ==================================
 
-# These settings simplify using heartbeat with the Elastic Cloud (https://cloud.elastic.co/).
+# These settings simplify using Heartbeat with the Elastic Cloud (https://cloud.elastic.co/).
 
 # The cloud.id setting overwrites the `output.elasticsearch.hosts` and
 # `setup.kibana.host` options.
@@ -109,10 +109,11 @@ ssl.enabled: {{ heartbeat_ssl_enabled }}
   ssl.certificate: {{ heartbeat_cert_file }}
   ssl.key: {{ heartbeat_pkey_file }}
 {% endif %}
+
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  #hosts: ["localhost:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -143,6 +144,13 @@ processors:
   - add_cloud_metadata: ~
 
 #================================ Logging =====================================
+logging.to_syslog: {{ heartbeat_logging_to_syslog }}
+logging.to_files: {{ heartbeat_logging_to_files }}
+logging.files:
+  path: {{ path.logs }}
+  name: {{ heartbeat_logname }}
+  rotateeverybytes: {{ heartbeat_rotateeverybytes }}
+  keepfiles: {{ heartbeat_keepfiles }}
 
 # Sets log level. The default log level is info.
 # Available log levels are: error, warning, info, debug
@@ -152,13 +160,6 @@ processors:
 # To enable all selectors use ["*"]. Examples of other selectors are "beat",
 # "publish", "service".
 #logging.selectors: ["*"]
-logging.to_syslog: {{ heartbeat_logging_to_syslog }}
-logging.to_files: {{ heartbeat_logging_to_files }}
-logging.files:
-  path: {{ path.logs }}
-  name: {{ heartbeat_logname }}
-  rotateeverybytes: {{ heartbeat_rotateeverybytes }}
-  keepfiles: {{ heartbeat_keepfiles }}
 
 #============================== X-Pack Monitoring ===============================
 # heartbeat can export internal metrics to a central Elasticsearch monitoring
@@ -169,7 +170,7 @@ logging.files:
 #monitoring.enabled: false
 
 # Sets the UUID of the Elasticsearch cluster under which monitoring data for this
-# heartbeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
+# Heartbeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
 # is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch.
 #monitoring.cluster_uuid:
 
