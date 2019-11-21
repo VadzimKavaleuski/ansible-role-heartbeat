@@ -11,15 +11,15 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run a one-line script
       run: ls -la
-    - name: Run a multi-line script
-      run: |
-        sudo apt-get install -y python3 git 
-        sudo apt-get install -y python3-dev gcc rsync make openssl-dev libffi-dev musl-dev linux-headers openssh-client 
+    - name: Run a multi-line script 1
+      run: sudo apt-get install -y python3 git 
+    - name: Run a multi-line script 2
+      run: sudo apt-get install -y python3-dev gcc rsync make openssl-dev libffi-dev musl-dev linux-headers openssh-client 
 #        sudo rm -rf /var/cache/apk/* 
-    - name: Run a multi-line script
+    - name: Run a multi-line script 3
       run: |
         sudo pip3 install --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3 ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION git+https://github.com/ansible/ansible-lint.git && ln -s /usr/bin/python3 /usr/bin/python
-    - name: Run a multi-line script
+    - name: Run a multi-line script 4
       run: |
         ansible --version
         ansible-lint --version
