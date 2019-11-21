@@ -15,7 +15,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y ansible-lint python-pip libssl-dev libffi-dev
             # pip install --upgrade --user setuptools
-            pip install --user molecule
+      - name: install molecule
+        run: pip install --user molecule
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
