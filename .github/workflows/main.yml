@@ -7,9 +7,9 @@ jobs:
     # runs-on: ubuntu-latest
     runs-on: docker://leandelivery/docker-ansible-ci:ansible-2.8
     steps:
-      - name: use container
+      # - name: use container
         # uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        steps:
+        # steps:
         - name: before_script
           run: |
             rm -rf molecule/resources/provisioning
