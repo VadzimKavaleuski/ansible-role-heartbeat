@@ -12,7 +12,12 @@ jobs:
         # steps:
       - name: before_script
         run: |
-            sudo apt-get install -y ansible-lint molecule
+            sudo apt-get update
+            sudo apt-get install -y ansible-lint python-pip libssl-dev 
+            pip install --upgrade --user setuptools
+            pip install --user molecule
+      - name: before_script
+        run: |
             rm -rf molecule/resources/provisioning
             ansible --version
             ansible-lint --version
