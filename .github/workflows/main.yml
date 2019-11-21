@@ -6,8 +6,8 @@ jobs:
   build_and_test:
     # runs-on: ubuntu-latest
     steps:
-    - name: use container
-      uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      - name: use container
+        uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
     # - name: use container ?
     #   run: rm -rf molecule/resources/provisioning
 #   - ansible --version
