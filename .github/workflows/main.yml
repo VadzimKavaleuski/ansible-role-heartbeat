@@ -13,7 +13,7 @@ jobs:
       - name: before_script
         run: |
             sudo apt-get update
-            sudo apt-get install -y ansible-lint python-pip libssl-dev 
+            sudo apt-get install -y ansible-lint python-pip libssl-dev libffi-dev
             pip install --upgrade --user setuptools
             pip install --user molecule
       - name: before_script
