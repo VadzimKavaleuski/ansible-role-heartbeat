@@ -3,27 +3,35 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  build_and_test:
+    # runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: ls -la
-    - name: Run a multi-line script 1
-      run: sudo apt-get install -y python3 git 
-    - name: Run a multi-line script 2
-      run: sudo apt-get install -y python3-dev gcc rsync make libffi-dev musl-dev openssh-client 
-#        sudo rm -rf /var/cache/apk/* 
-    - name: Run a multi-line script 3
-      run: |
-        sudo pip3 install
-        #  --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3
-        #  ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION git+https://github.com/ansible/ansible-lint.git 
-#        ln -s /usr/bin/python3 /usr/bin/python
-    - name: Run a multi-line script 4
-      run: |
-        ansible --version
-        ansible-lint --version
-        molecule --version
+    - name: use container
+      uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      run rm -rf molecule/resources/provisioning
+#   - ansible --version
+#   - ansible-lint --version
+#   - molecule --version
+#   - git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
+
+
+
+#     - uses: actions/checkout@v1
+#     - name: Run a one-line script
+#       run: ls -la
+#     - name: Run a multi-line script 1
+#       run: sudo apt-get install -y python3 git 
+#     - name: Run a multi-line script 2
+#       run: sudo apt-get install -y python3-dev gcc rsync make libffi-dev musl-dev openssh-client 
+# #        sudo rm -rf /var/cache/apk/* 
+#     - name: Run a multi-line script 3
+#       run: |
+#         sudo pip3 install
+#         #  --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3
+#         #  ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION git+https://github.com/ansible/ansible-lint.git 
+# #        ln -s /usr/bin/python3 /usr/bin/python
+#     - name: Run a multi-line script 4
+#       run: |
+#         ansible --version
+#         ansible-lint --version
+#         molecule --version
