@@ -4,30 +4,31 @@ on: [push]
 
 jobs:
   build_and_test:
-    # runs-on: ubuntu-latest
-    runs-on: docker://leandelivery/docker-ansible-ci:ansible-2.8
+    runs-on: ubuntu-latest
+    # runs-on: docker://leandelivery/docker-ansible-ci:ansible-2.8
     steps:
       # - name: use container
         # uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         # steps:
-        - name: before_script
-          run: |
+      - name: before_script
+        run: |
+            sudo apt-get install -y ansible-lint
             rm -rf molecule/resources/provisioning
             ansible --version
             ansible-lint --version
             molecule --version
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
-      # - uses: actions/checkout@v1
-      # - name: befor lint
-      #   run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
-      # - name: lint
-      #   run: |
-      #     yamllint . -c .yamllint
-      #     ansible-lint . -c .ansible-lint
-      # - name: after lint
-      #   run: rm -rf ~/ansible-lint-rules
-      # - name: deployment test
-      #   run: molecule test -s default
+      - uses: actions/checkout@v1
+      - name: befor lint
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+      - name: lint
+        run: |
+          yamllint . -c .yamllint
+          ansible-lint . -c .ansible-lint
+      - name: after lint
+        run: rm -rf ~/ansible-lint-rules
+      - name: deployment test
+        run: molecule test -s default
 
 
 
