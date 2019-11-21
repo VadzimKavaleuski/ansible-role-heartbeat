@@ -18,7 +18,10 @@ jobs:
 #        sudo rm -rf /var/cache/apk/* 
     - name: Run a multi-line script 3
       run: |
-        sudo pip3 install --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3 ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION git+https://github.com/ansible/ansible-lint.git && ln -s /usr/bin/python3 /usr/bin/python
+        sudo pip3 install
+        #  --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3
+        #  ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION git+https://github.com/ansible/ansible-lint.git 
+#        ln -s /usr/bin/python3 /usr/bin/python
     - name: Run a multi-line script 4
       run: |
         ansible --version
