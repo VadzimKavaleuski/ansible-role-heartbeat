@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: use container
         uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-    # - name: use container ?
-    #   run: rm -rf molecule/resources/provisioning
+      - name: use container ?
+        run: rm -rf molecule/resources/provisioning
 #   - ansible --version
 #   - ansible-lint --version
 #   - molecule --version
