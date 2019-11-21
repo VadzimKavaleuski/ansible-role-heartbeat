@@ -12,7 +12,7 @@ jobs:
         # steps:
       - name: before_script
         run: |
-            sudo apt-get install -y ansible-lint
+            sudo apt-get install -y ansible-lint molecule
             rm -rf molecule/resources/provisioning
             ansible --version
             ansible-lint --version
