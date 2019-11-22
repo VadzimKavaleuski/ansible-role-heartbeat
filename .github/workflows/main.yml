@@ -15,12 +15,13 @@ jobs:
             sudo apt-get update
             # sudo apt-get remove -y python*
             sudo apt-get install -y ansible-lint python3.6 python-pip libssl-dev libffi-dev
-            sudo ln -s /usr/bin/python3 /usr/bin/python
+            sudo ln -s /usr/bin/python3.6 /usr/bin/python
             python --version
             python3 --version
-            pip3 install --upgrade --user setuptools
+            python3.6 --version
+            pip install --upgrade --user setuptools
       - name: install molecule
-        run: pip3 install --user molecule
+        run: pip install --user molecule
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
