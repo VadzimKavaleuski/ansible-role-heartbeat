@@ -11,7 +11,7 @@ jobs:
       - name: before_script
         run: |
             sudo apt-get update
-            sudo apt-get install -y ansible-lint
+            sudo apt-get install -y ansible-lint libssl-dev libffi-dev
             ansible-lint --version
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
