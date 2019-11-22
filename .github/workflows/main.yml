@@ -14,7 +14,8 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install -y ansible-lint python-pip libssl-dev libffi-dev
-            pip3 install --upgrade --user setuptools
+            python --version
+            pip install --upgrade --user setuptools
       - name: install molecule
         run: pip3 install --user molecule
       - name: before_script
