@@ -24,7 +24,9 @@ jobs:
             # python3.6 --version
             sudo pip install --upgrade --user setuptools
       - name: install molecule
-        run: sudo pip install molecule
+        run: |
+            sudo pip install molecule 
+            sudo pip install 'molecule[docker]'
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
