@@ -19,9 +19,9 @@ jobs:
             python --version
             python3 --version
             python3.6 --version
-            pip install --upgrade --user setuptools
+            sudo pip install --upgrade --user setuptools
       - name: install molecule
-        run: pip install --user molecule
+        run: sudo pip install --user molecule
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
