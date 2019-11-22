@@ -17,6 +17,7 @@ jobs:
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       - name: lint
         run: |
+          ls -la
           yamllint . -c .yamllint
           ansible-lint . -c .ansible-lint
       - name: after lint
