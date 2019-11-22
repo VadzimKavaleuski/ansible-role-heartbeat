@@ -17,7 +17,7 @@ jobs:
             ls -ll
             sudo apt-get update
             # sudo apt-get remove -y python*
-            sudo apt-get install -y ansible-lint python-pip libssl-dev libffi-dev
+            sudo apt-get install -y ansible-lint python-pip libssl-dev libffi-dev docker
             # sudo ln -s /usr/bin/python3.6 /usr/bin/python
             # python --version
             python3 --version
