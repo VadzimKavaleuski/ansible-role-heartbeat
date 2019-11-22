@@ -24,7 +24,7 @@ jobs:
   platform_test:
     needs: lint_check
     runs-on: ubuntu-latest
-      steps:
+    steps:
       - uses: actions/checkout@v1
       - name: before_script
         run: |
