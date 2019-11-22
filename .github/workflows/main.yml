@@ -14,7 +14,6 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install -y ansible-lint python3.6 python-pip libssl-dev libffi-dev
-            sudo update-alternatives --config python3
             python --version
             pip install --upgrade --user setuptools
       - name: install molecule
