@@ -11,6 +11,7 @@ jobs:
       # - name: use container
         # uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         # steps:
+      - uses: actions/checkout@v1
       - name: before_script
         run: |
             ls -ll
@@ -31,7 +32,6 @@ jobs:
             ansible-lint --version
             molecule --version
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
-      - uses: actions/checkout@v1
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       - name: lint
