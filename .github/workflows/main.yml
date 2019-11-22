@@ -41,5 +41,13 @@ jobs:
           ansible-lint . -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
+      # - name: deployment test
+      #   run: molecule test -s default
       - name: deployment test
-        run: molecule test -s default
+        run: molecule list
+      - name: check docker
+        run: docker ps
+
+  # checkondocker:
+  #   steps:
+  #     uses: docker://leandelivery/docker-systemd:centos7
