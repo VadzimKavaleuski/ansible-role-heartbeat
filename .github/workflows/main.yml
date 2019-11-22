@@ -45,3 +45,26 @@ jobs:
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s default
+  platform_test1:
+    needs: lint_check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: before_script
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y python-pip libssl-dev libffi-dev docker
+            sudo pip install --upgrade --user setuptools
+      - name: install molecule
+        run: |
+            sudo pip install molecule
+            sudo pip install 'molecule[docker]'
+      - name: before_script
+        run: |
+            rm -rf molecule/resources/provisioning
+            ansible --version
+            ansible-lint --version
+            molecule --version
+            git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
+      - name: deployment test
+        run: molecule test -s default
