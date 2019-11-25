@@ -59,7 +59,9 @@ jobs:
             sudo pip install molecule boto3
       - name: before_script
         run: |
+            ls -la
             rm -rf molecule/resources/provisioning
+            ls -la
             ansible --version
             ansible-lint --version
             molecule --version
