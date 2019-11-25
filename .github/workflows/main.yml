@@ -45,12 +45,12 @@ jobs:
       - name: deployment test
         run: molecule test -s default
   platform_test1:
+    env:
+      aws_access_key_id: ${{aws_access_key_id}}
+      aws_secret_access_key: ${{aws_secret_access_key}}
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
-        env:
-        - aws_access_key_id: ${{aws_access_key_id}}
-        - aws_secret_access_key: ${{aws_secret_access_key}}
       - uses: actions/checkout@v1
       - name: before_script
         run: |
