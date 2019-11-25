@@ -54,40 +54,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check ip
-        run: ping -c3 10.1.0.1
+        run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.2
+        run: ping -c3 10.1.0.1 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.3
+        run: ping -c3 10.1.0.2 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.4
+        run: ping -c3 10.1.0.3 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.5
+        run: ping -c3 10.1.0.4 2>/dev/null
+      - name: check ip
+        run: ping -c3 10.1.0.5 2>/dev/null
   platform_test2:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
       - name: check ip
-        run: ping -c3 10.1.0.1
+        run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.2
+        run: ping -c3 10.1.0.1 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.3
+        run: ping -c3 10.1.0.2 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.4
+        run: ping -c3 10.1.0.3 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.5
+        run: ping -c3 10.1.0.4 2>/dev/null
+      - name: check ip
+        run: ping -c3 10.1.0.5 2>/dev/null
   platform_test3:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
       - name: check ip
-        run: ping -c3 10.1.0.1
+        run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.2
+        run: ping -c3 10.1.0.1 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.3
+        run: ping -c3 10.1.0.2 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.4
+        run: ping -c3 10.1.0.3 2>/dev/null
       - name: check ip
-        run: ping -c3 10.1.0.5
+        run: ping -c3 10.1.0.4 2>/dev/null
+      - name: check ip
+        run: ping -c3 10.1.0.5 2>/dev/null
