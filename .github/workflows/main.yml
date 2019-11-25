@@ -77,7 +77,7 @@ jobs:
         run: ping -c3 10.1.0.4
       - name: check ip
         run: ping -c3 10.1.0.5
-platform_test3:
+  platform_test3:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
