@@ -7,6 +7,8 @@ jobs:
   lint_check:
     runs-on: ubuntu-latest
     steps:
+      - name: check ip
+        run: ip address
       - uses: actions/checkout@v1
       - name: before_script
         run: |
@@ -26,6 +28,8 @@ jobs:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
+      - name: check ip
+        run: ip address
       - uses: actions/checkout@v1
       - name: before_script
         run: |
@@ -49,5 +53,19 @@ jobs:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
-      - name: before_script
+      - name: check ip
+        run: ip address
+  platform_test2:
+    needs: lint_check
+    runs-on: ubuntu-latest
+    steps:
+      - name: check ip
+        run: ip address
+      - name: check ip
+        run: ip address
+      - name: check ip
+        run: ip address
+      - name: check ip
+        run: ip address
+      - name: check ip
         run: ip address
