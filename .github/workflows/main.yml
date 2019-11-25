@@ -56,15 +56,15 @@ jobs:
       - name: check ip
         run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.1 2>/dev/null
+        run: ping -c3 10.1.0.1 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.2 2>/dev/null
+        run: ping -c3 10.1.0.2 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.3 2>/dev/null
+        run: ping -c3 10.1.0.3 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.4 2>/dev/null
+        run: ping -c3 10.1.0.4 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.5 2>/dev/null
+        run: ping -c3 10.1.0.5 ||echo "fail"
   platform_test2:
     needs: lint_check
     runs-on: ubuntu-latest
@@ -72,15 +72,15 @@ jobs:
       - name: check ip
         run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.1 2>/dev/null
+        run: ping -c3 10.1.0.1 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.2 2>/dev/null
+        run: ping -c3 10.1.0.2 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.3 2>/dev/null
+        run: ping -c3 10.1.0.3 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.4 2>/dev/null
+        run: ping -c3 10.1.0.4 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.5 2>/dev/null
+        run: ping -c3 10.1.0.5 ||echo "fail"
   platform_test3:
     needs: lint_check
     runs-on: ubuntu-latest
@@ -88,12 +88,12 @@ jobs:
       - name: check ip
         run: ip address
       - name: check ip
-        run: ping -c3 10.1.0.1 2>/dev/null
+        run: ping -c3 10.1.0.1 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.2 2>/dev/null
+        run: ping -c3 10.1.0.2 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.3 2>/dev/null
+        run: ping -c3 10.1.0.3 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.4 2>/dev/null
+        run: ping -c3 10.1.0.4 ||echo "fail"
       - name: check ip
-        run: ping -c3 10.1.0.5 2>/dev/null
+        run: ping -c3 10.1.0.5 ||echo "fail"
