@@ -48,6 +48,9 @@ jobs:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
+      env:
+        aws_access_key_id: ${{aws_access_key_id}}
+        aws_secret_access_key: ${{aws_secret_access_key}}
       - uses: actions/checkout@v1
       - name: before_script
         run: |
@@ -57,11 +60,14 @@ jobs:
       - name: install molecule
         run: |
             sudo pip install molecule boto3
+      - name: prepare aws creds
+        run: |
+            echo "[default]\n" >>~/.aws/credentials
+            echo "aws_access_key_id=\n" >>~/.aws/credentials
+            echo "aws_secret_access_key\n" >>~/.aws/credentials
       - name: before_script
         run: |
-            ls -la
             rm -rf molecule/resources/provisioning
-            ls -la
             ansible --version
             ansible-lint --version
             molecule --version
