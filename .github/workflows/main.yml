@@ -53,12 +53,11 @@ jobs:
       - name: before_script
         run: |
             sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev docker
+            sudo apt-get install -y python-pip libssl-dev libffi-dev boto3 
             sudo pip install --upgrade --user setuptools
       - name: install molecule
         run: |
             sudo pip install molecule
-            sudo pip install 'molecule[docker]'
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
