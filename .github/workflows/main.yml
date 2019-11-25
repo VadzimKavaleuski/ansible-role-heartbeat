@@ -54,18 +54,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.1
+      - name: check ip
+        run: ping -c3 10.1.0.2
+      - name: check ip
+        run: ping -c3 10.1.0.3
+      - name: check ip
+        run: ping -c3 10.1.0.4
+      - name: check ip
+        run: ping -c3 10.1.0.5
   platform_test2:
     needs: lint_check
     runs-on: ubuntu-latest
     steps:
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.1
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.2
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.3
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.4
       - name: check ip
-        run: ip address
+        run: ping -c3 10.1.0.5
+platform_test3:
+    needs: lint_check
+    runs-on: ubuntu-latest
+    steps:
+      - name: check ip
+        run: ping -c3 10.1.0.1
+      - name: check ip
+        run: ping -c3 10.1.0.2
+      - name: check ip
+        run: ping -c3 10.1.0.3
+      - name: check ip
+        run: ping -c3 10.1.0.4
+      - name: check ip
+        run: ping -c3 10.1.0.5
