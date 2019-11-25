@@ -7,7 +7,7 @@ jobs:
   lint_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@develop
+      - uses: actions/checkout@v1
       - name: before_script
         run: |
             sudo apt-get update
