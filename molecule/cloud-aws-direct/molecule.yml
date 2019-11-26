@@ -28,7 +28,7 @@ platforms:
     groups:
       - rhel_family
 
-  # - name: test-aws-centos7-heartbeat 
+  # - name: test-aws-centos7-heartbeat
   #   image: ami-9887c6e7
   #   platform: centos7
   #   instance_type: m5.large
