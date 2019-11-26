@@ -26,7 +26,8 @@ platforms:
     security_group_name:
       - default
     wait_timeout: 1800
-    ssh_user: centos
+    ssh_user: root
+    #centos
     groups:
       - rhel_family
 
