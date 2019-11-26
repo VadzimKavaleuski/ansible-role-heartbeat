@@ -26,8 +26,7 @@ platforms:
     wait_timeout: 1800
     ssh_user: root
     #centos
-    group_id:
-      - 'sg-0e252acda60827bf2'
+    # group_id: 'sg-0e252acda60827bf2'
       #rhel_family
 
   # - name: test-aws-centos7-heartbeat
