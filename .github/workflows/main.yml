@@ -54,7 +54,7 @@ jobs:
       EC2_SECRET_KEY: '4'
       EC2_REGION: 'us-east-1'
       KEY_NAME: '5'
-      key_name: '6'
+      # key_name: '6'
       MOLECULE_DEBUG: true
 
     # needs: lint_check
