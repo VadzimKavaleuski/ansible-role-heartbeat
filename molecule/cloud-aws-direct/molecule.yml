@@ -11,7 +11,7 @@ lint:
     config-file: .yamllint
 platforms:
   - name: test-aws-centos8-heartbeat
-    key_name: aws_key
+    key_name: 'aws_key'
     image: ami-034a46a96c820cc75
     #ami-0ed2ad9dc845b42b6
     platform: centos8
