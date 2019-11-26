@@ -44,7 +44,7 @@ jobs:
   #           git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
   #     - name: deployment test
   #       run: molecule test -s default
-  platform_test1:
+  platform_test_aws:
     env:
       AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
@@ -79,6 +79,31 @@ jobs:
             pip list boto | grep boto
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
-        run: molecule test -s cloud-aws-direct||cat /home/runner/.ansible_async/*
-      # - name: deployment test
-      #   run: /home/runner/.cache/molecule/ansible-role-heartbeat/cloud-aws-direct/ssh_key
+        run: molecule test -s cloud-aws-direct
+platform_test_azure:
+    env:
+      AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
+      EC2_REGION: 'us-east-1'
+      # MOLECULE_DEBUG: true
+    # needs: lint_check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: before_script
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y python-pip libssl-dev libffi-dev
+            sudo pip install --upgrade --user setuptools
+      - name: install molecule
+        run: sudo pip install molecule boto boto3 botocore
+      - name: before_script
+        run: |
+            rm -rf molecule/resources/provisioning
+            ansible --version
+            ansible-lint --version
+            molecule --version
+            pip list boto | grep boto
+            git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
+      - name: deployment test
+        run: molecule test -s cloud-aws-direct
