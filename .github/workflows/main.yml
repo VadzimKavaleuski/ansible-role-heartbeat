@@ -53,7 +53,7 @@ jobs:
       AWS_SECRET_KEY: ${{secrets.aws_secret_access_key}}
       EC2_SECRET_KEY: ${{secrets.aws_secret_access_key}}
       EC2_REGION: 'us-east-1'
-      KEY_NAME
+      KEY_NAME: ${{secrets.aws_secret_access_key}}
 
     # needs: lint_check
     runs-on: ubuntu-latest
