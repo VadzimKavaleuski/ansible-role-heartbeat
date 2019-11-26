@@ -47,13 +47,13 @@ jobs:
   platform_test1:
     env:
       AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
-      AWS_ACCESS_KEY: ${{secrets.aws_access_key_id}}
-      EC2_ACCESS_KEY: ${{secrets.aws_access_key_id}}
+      AWS_ACCESS_KEY: '1'
+      EC2_ACCESS_KEY: '2'
       AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
-      AWS_SECRET_KEY: ${{secrets.aws_secret_access_key}}
-      EC2_SECRET_KEY: ${{secrets.aws_secret_access_key}}
+      AWS_SECRET_KEY: '3'
+      EC2_SECRET_KEY: '4'
       EC2_REGION: 'us-east-1'
-      KEY_NAME: ${{secrets.aws_secret_access_key}}
+      KEY_NAME: 5
 
     # needs: lint_check
     runs-on: ubuntu-latest
