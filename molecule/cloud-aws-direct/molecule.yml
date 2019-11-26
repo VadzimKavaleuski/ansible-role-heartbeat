@@ -17,7 +17,8 @@ platforms:
     instance_type: centos8
     #m5.large
     region: us-east-1
-    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    vpc_subnet_id: subnet-0510c0f70cf0944a7
+    #subnet-0f2b9cd66faea38af
     assign_public_ip: false
     spot_price: 0.04
     security_group_name:
@@ -78,7 +79,8 @@ platforms:
     platform: ubuntu18
     instance_type: t2.micro
     region: us-east-1
-    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    vpc_subnet_id: subnet-0510c0f70cf0944a7
+    #subnet-0f2b9cd66faea38af
     assign_public_ip: false
     security_group_name:
       - default
