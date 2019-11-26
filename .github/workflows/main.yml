@@ -82,3 +82,5 @@ jobs:
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s cloud-aws-direct
+      - name: deployment test
+        run: cat /home/runner/.ansible_async/*
