@@ -47,11 +47,11 @@ jobs:
   platform_test1:
     env:
       AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
-      AWS_ACCESS_KEY: ${{secrets.aws_access_key_id}}
-      EC2_ACCESS_KEY: ${{secrets.aws_access_key_id}}
+      # AWS_ACCESS_KEY: ${{secrets.aws_access_key_id}}
+      # EC2_ACCESS_KEY: ${{secrets.aws_access_key_id}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
-      AWS_SECRET_KEY: ${{secrets.aws_secret_access_key}}
-      EC2_SECRET_KEY: ${{secrets.aws_secret_access_key}}
+      # AWS_SECRET_KEY: ${{secrets.aws_secret_access_key}}
+      # EC2_SECRET_KEY: ${{secrets.aws_secret_access_key}}
       EC2_REGION: 'us-east-1'
 
     # needs: lint_check
@@ -79,6 +79,7 @@ jobs:
             ansible --version
             ansible-lint --version
             molecule --version
+            pip list boto | grep boto
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s cloud-aws-direct||cat /home/runner/.ansible_async/*
