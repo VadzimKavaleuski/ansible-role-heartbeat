@@ -82,8 +82,8 @@ jobs:
         run: molecule test -s cloud-aws-direct
   platform_test_azure:
     env:
-      AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
+      AZURE_AD_USER: ${{secrets.AZURE_AD_USER}}
+      AZURE_PASSWORD: ${{secrets.AZURE_PASSWORD}}
       EC2_REGION: 'us-east-1'
       # MOLECULE_DEBUG: true
     # needs: lint_check
@@ -106,4 +106,4 @@ jobs:
             pip list boto | grep boto
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
-        run: molecule test -s cloud-aws-direct
+        run: molecule test -s cloud-azure-direct
