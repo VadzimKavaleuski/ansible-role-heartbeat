@@ -27,7 +27,8 @@ platforms:
     ssh_user: root
     #centos
     groups:
-      - rhel_family
+      - sg-0e252acda60827bf2
+      #rhel_family
 
   # - name: test-aws-centos7-heartbeat
   #   image: ami-9887c6e7
