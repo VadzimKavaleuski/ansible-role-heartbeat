@@ -11,10 +11,10 @@ lint:
     config-file: .yamllint
 platforms:
   - name: test-aws-centos8-heartbeat
-    image: ami-034a46a96c820cc75 
+    image: ami-034a46a96c820cc75
     #ami-0ed2ad9dc845b42b6
     platform: centos8
-    instance_type: centos8 
+    instance_type: centos8
     #m5.large
     region: us-east-1
     vpc_subnet_id: subnet-0f2b9cd66faea38af
@@ -73,7 +73,7 @@ platforms:
   #     - debian_family
 
   - name: test-aws-ubuntu18-heartbeat
-    image: ami-08752709a9f88a140 
+    image: ami-08752709a9f88a140
     #ami-012fd5eb46f56731f
     platform: ubuntu18
     instance_type: t2.micro
