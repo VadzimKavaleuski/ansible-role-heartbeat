@@ -82,8 +82,12 @@ jobs:
         run: molecule test -s cloud-aws-direct
   platform_test_azure:
     env:
-      AZURE_AD_USER: ${{secrets.AZURE_AD_USER}}
-      AZURE_PASSWORD: ${{secrets.AZURE_PASSWORD}}
+      # AZURE_AD_USER: ${{secrets.AZURE_AD_USER}}
+      # AZURE_PASSWORD: ${{secrets.AZURE_PASSWORD}}
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_SECRET: ${{secrets.AZURE_SECRET}}
+      AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+      AZURE_TENANT: ${{secrets.AZURE_TENANT}}
       EC2_REGION: 'us-east-1'
       # MOLECULE_DEBUG: true
     # needs: lint_check
