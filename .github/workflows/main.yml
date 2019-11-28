@@ -72,6 +72,7 @@ jobs:
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
+            ip address
             ansible --version
             ansible-lint --version
             molecule --version
