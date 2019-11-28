@@ -81,8 +81,6 @@ jobs:
         run: molecule test -s cloud-aws-direct
   platform_test_azure:
     env:
-      # AZURE_AD_USER: ${{secrets.AZURE_AD_USER}}
-      # AZURE_PASSWORD: ${{secrets.AZURE_PASSWORD}}
       AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
       AZURE_SECRET: ${{secrets.AZURE_SECRET}}
       AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
@@ -99,14 +97,13 @@ jobs:
             sudo apt-get install -y python-pip libssl-dev libffi-dev
             sudo pip install --upgrade --user setuptools
       - name: install molecule
-        run: sudo pip install molecule boto boto3 botocore msrestazure ansible[azure]
+        run: sudo pip install molecule msrestazure ansible[azure]
       - name: before_script
         run: |
             rm -rf molecule/resources/provisioning
             ansible --version
             ansible-lint --version
             molecule --version
-            pip list boto | grep boto
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s cloud-azure-direct
