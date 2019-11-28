@@ -11,8 +11,8 @@ lint:
     config-file: .yamllint
 platforms:
   - name: test-aws-centos8-heartbeat
-    # image: ami-034a46a96c820cc75
     image: ami-0ed2ad9dc845b42b6
+    # image: ami-034a46a96c820cc75
     platform: centos8
     instance_type: t2.micro
     #m5.large
