@@ -57,11 +57,13 @@ jobs:
         # with:
         #   ref: develop
       - name: before_script
-        run: ls -ll
+        run: ls -la
       - name: before_script
         run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
       - name: before_script
-        run: cat .git/packed-refs|| ls -la .git
+        run: ls -la
+      - name: before_script
+        run: cat .git/packed-refs
       - name: before_script
         run: |
             sudo apt-get update
