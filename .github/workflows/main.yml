@@ -53,12 +53,12 @@ jobs:
     # needs: lint_check
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
         # with:
         #   ref: develop
-      - name: before_script
-        run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
-      - name: before_script
+      # - name: before_script
+      #   run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
+      # - name: before_script
         run: cp -r -v ./add/provisioning/ ./molecule/resources
       - name: before_script
         run: cat .git/packed-refs
