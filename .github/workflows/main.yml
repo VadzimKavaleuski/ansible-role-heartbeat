@@ -60,7 +60,7 @@ jobs:
       #   run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
       - name: before_script
         run: |
-            cd test
+            # cd test
             ls -la
       - name: before_script
         run: |
@@ -79,7 +79,7 @@ jobs:
       #       cat .aws/credentials
       - name: before_script
         run: |
-            rm -rf molecule/resources/provisioning
+            # rm -rf molecule/resources/provisioning
             ip address
             ansible --version
             ansible-lint --version
