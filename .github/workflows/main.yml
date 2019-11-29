@@ -59,7 +59,7 @@ jobs:
       - name: before_script
         run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
       - name: before_script
-        run: git status
+        run: cat .git/ORIG_HEAD
       - name: before_script
         run: |
             sudo apt-get update
