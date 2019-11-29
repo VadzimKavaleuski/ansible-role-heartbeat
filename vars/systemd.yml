@@ -1,8 +1,0 @@
----
-#hb_service_script: '{{ heartbeat_service_name }}.service'
-hb_service_script: '{{ heartbeat_cfg_file_name }}.service'
-hb_service_path: /usr/lib/systemd/system
-hb_service_script_mode: 0644
-hb_service_handlers:
-  - Reload systemd configuration
-  - Restart heartbeat
