@@ -58,7 +58,7 @@ jobs:
         #   ref: develop
       # - name: before_script
       #   run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
-      # - name: before_script
+      - name: before_script
         run: xd test
       - name: before_script
         run: |
