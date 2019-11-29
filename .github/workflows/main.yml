@@ -78,6 +78,7 @@ jobs:
             molecule --version
             pip list boto | grep boto
             echo "before ls"
+            git status
             ls -ll
             ls -ll molecule/resources/provisioning
             echo "after ls"
