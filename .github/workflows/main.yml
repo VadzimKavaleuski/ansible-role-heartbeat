@@ -82,6 +82,8 @@ jobs:
             echo "before ls"
             # git branch
             ls -ll
+            ls -ll molecule
+            ls -ll molecule/resources
             ls -ll molecule/resources/provisioning
             echo "after ls"
       - name: deployment test
