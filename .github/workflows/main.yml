@@ -77,7 +77,6 @@ jobs:
             ansible-lint --version
             molecule --version
             pip list boto | grep boto
-#            git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
             echo "before ls"
             ls -ll
             ls -ll molecule/resources/provisioning
