@@ -53,9 +53,9 @@ jobs:
     # needs: lint_check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-        with:
-          ref: develop
+      - uses: actions/checkout@develop
+        # with:
+        #   ref: develop
       - name: before_script
         run: |
             sudo apt-get update
