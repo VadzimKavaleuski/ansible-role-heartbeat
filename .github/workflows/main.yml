@@ -83,9 +83,9 @@ jobs:
             # git branch
             ls -ll
             # ls -ll molecule
-            echo "ls -ll molecule"
+            echo "ls -ll molecule "
             ls -ll molecule
-            echo "ls -ll molecule/resources"/provisioning"
+            echo "ls -ll molecule/resources"
             ls -ll molecule/resources
             echo "ls -ll molecule/resources/provisioning"
             ls -ll molecule/resources/provisioning
