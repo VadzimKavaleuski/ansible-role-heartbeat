@@ -156,7 +156,8 @@
       set_fact:
         instance_conf_dict:
           instance: '{{ item.instances[0].tags.instance }}'
-          address: '{{ item.instances[0].private_ip }}'
+          address: '{{ item.instances[0].public_ip }}'
+          # address: '{{ item.instances[0].private_ip }}'
           public_ip: '{{ item.instances[0].public_ip | default("") }}'
           user: '{{ item.instances[0].tags.ssh_user | default(ansible_user) }}'
           port: >-
