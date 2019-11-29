@@ -10,27 +10,15 @@ lint:
   options:
     config-file: .yamllint
 platforms:
-  - name: test-azure-Windows2016-heartbeat
-    platform: windows2016core
-    assign_public_ip: false
-    vm_size: Standard_D2s_v3
-    az_location: northeurope
-    az_resource_group_name: epm-ldi
-    az_virtual_network_name: epm-ldi-northeurope-vnet
-    az_subnet_name: epm-ldi-northeurope-subnet
-    az_network_security_group: epm-ldi-northeurope-sg
-    groups:
-      - windows
-
   - name: test-azure-Windows2019-heartbeat
     platform: windows2019core
     assign_public_ip: true
     vm_size: Standard_D2s_v3
-    az_location: northeurope
-    az_resource_group_name: epm-ldi
-    az_virtual_network_name: epm-ldi-northeurope-vnet
-    az_subnet_name: epm-ldi-northeurope-subnet
-    az_network_security_group: epm-ldi-northeurope-sg
+    az_location: eastus
+    az_resource_group_name: ldi
+    az_virtual_network_name: LDI-vnet
+    az_subnet_name: default
+    az_network_security_group: test1-nsg
     groups:
       - windows
 provisioner:

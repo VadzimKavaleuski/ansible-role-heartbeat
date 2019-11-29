@@ -1,0 +1,355 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: >-
+    {{ not ((lookup('env', 'MOLECULE_DEBUG') | bool)
+        or (molecule_yml.provisioner.log | default(false) | bool)) }}
+  vars:
+    ci_branch_name: >-
+      {{ lookup('env', 'CI_COMMIT_REF_NAME') }}
+
+    # Azure VM images details
+    vm_admin_username: >-
+      {{ lookup('env', 'WINRM_ADMIN_ACC') | default('vm-admin', true) }}
+    vm_admin_password: >-
+      {{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', true) }}
+
+    keypair_name: "molecule-key_\
+      {{ lookup('env','MOLECULE_PROJECT_DIRECTORY').split('/')[-1] }}_\
+      {{ lookup('env','MOLECULE_SCENARIO_NAME') }}"
+    keypair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
+
+    ssh_port: 22
+    winrm_port: 5986
+    az_resource_group_name: epm-ldi
+    az_storage_account_name: "storage11490"
+    az_container: "gitlab-ci-tfstate"
+
+
+    groups_item_var: '{{ item.groups }}'
+    os_platform: >-
+      {{ ('windows' in groups_item_var) | ternary('windows', 'linux') }}
+    azure_images:
+      linux:
+        connection_port: 22
+        connection_protocol: ssh
+        ext_profile: {}
+        azure_os_profile:
+          computerNamePrefix: myVmss
+          adminUsername: '{{ vm_admin_username }}'
+          adminPassword: '{{ vm_admin_password }}'
+          linuxConfiguration:
+            disablePasswordAuthentication: true
+            ssh:
+              publicKeys:
+              - path: '/home/{{ vm_admin_username }}/.ssh/authorized_keys'
+                keyData: '{{ keypair.public_key }}'
+        centos7:
+          publisher: OpenLogic
+          offer: CentOS
+          sku: '7.7' # hardcoded! Currently can't find latest minor version using azure_rm_virtualmachineimage_facts module
+          version: latest
+        centos6:
+          publisher: OpenLogic
+          offer: CentOS
+          sku: '6.10' # hardcoded! Currently can't find latest minor version using azure_rm_virtualmachineimage_facts module
+          version: latest
+        ubuntu16:
+          publisher: Canonical
+          offer: UbuntuServer
+          sku: 16.04-LTS
+          version: latest
+        ubuntu18:
+          publisher: Canonical
+          offer: UbuntuServer
+          sku: 18.04-LTS
+          version: latest
+        debian9:
+          publisher: credativ
+          offer: Debian
+          sku: '9'
+          version: latest
+      windows:
+        connection_port: 5986
+        connection_protocol: winrm
+        ext_profile:
+          extensions:
+            - name: winrm-extension
+              properties:
+                publisher: Microsoft.Compute
+                type: CustomScriptExtension
+                typeHandlerVersion: '1.9'
+                settings:
+                  commandToExecute: "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1 -EnableCredSSP"
+                  fileUris: ["https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"]
+                autoUpgradeMinorVersion: true
+        azure_os_profile:
+          computerNamePrefix: myVmss
+          adminUsername: '{{ vm_admin_username }}'
+          adminPassword: '{{ vm_admin_password }}'
+        windows2016core:
+          publisher: MicrosoftWindowsServer
+          offer: WindowsServer
+          sku: 2016-Datacenter-Server-Core-smalldisk
+          version: latest
+        windows2019core:
+          publisher: MicrosoftWindowsServer
+          offer: WindowsServer
+          sku: 2019-Datacenter-Core-smalldisk
+          version: latest
+    tagsForVmss:
+      Name: '{{ item.name }}-{{ ci_branch_name }}'
+      Instance: '{{ item.name }}'
+      OS: '{{ os_platform }}'
+      Managed_by: Molecule
+    withLoadBalancer:
+      - id: "/subscriptions/{{ lookup('env','AZURE_SUBSCRIPTION_ID') }}\
+            /resourceGroups/{{ az_resource_group_name }}/providers/Microsoft.Network/\
+            loadBalancers/{{ unique_vmss_name[item.name] }}-lb/\
+            backendAddressPools/backendaddrpool0"
+    assign_public_ip: false
+
+  tasks:
+    - name: debug CI_COMMIT_REF_NAME
+      debug:
+        var: ci_branch_name
+
+    - name: Generate keypair
+      openssh_keypair:
+        # todo: must be protected!!!
+        path: /tmp/id_ssh_rsa
+        force: true
+      register: keypair
+
+    - name: Persist the keypair
+      copy:
+        dest: '{{ keypair_path }}'
+        src: '{{ keypair.filename }}'
+        mode: 0600
+      when: keypair.changed | bool
+
+    # Get unique idempotent name for VMSS, in Azure VMSS name == ID
+    # for VMSS name cannot be longer than 15 characters
+    # VM name sample "tst-c03a89e9-ss"
+    - name: Set unique VMSS name dicts
+      set_fact:
+        unique_vmss_name: >-
+          {{ unique_vmss_name | default({})
+            | combine({ item.name: 'tst-' + ((item.name + '-' + ci_branch_name)
+            | to_uuid)[:11] }) }}
+      loop: '{{ molecule_yml.platforms }}'
+      loop_control:
+        label: '{{ item.name }}'
+
+    - name: Create a public ip address
+      azure_rm_publicipaddress:
+        resource_group: '{{ az_resource_group_name }}'
+        name: '{{ unique_vmss_name[item.name] }}-ip'
+        allocation_method: Dynamic
+        domain_name: '{{ unique_vmss_name[item.name] }}'
+        location: '{{ item.az_location }}'
+        tags: '{{ tagsForVmss }}'
+      when: item.assign_public_ip | default(assign_public_ip)
+      loop: '{{ molecule_yml.platforms }}'
+      changed_when: false
+      async: 7200
+      poll: 0
+      register: public_ip
+
+    - name: Wait for public ip creation to complete
+      async_status:
+        jid: '{{ item.ansible_job_id }}'
+      when: not item.skipped | default(false)
+      loop: '{{ public_ip.results }}'
+      loop_control:
+        label: '{{ item.item.name }}'
+      register: public_ip_create
+      until: public_ip_create.finished
+      delay: 20
+      retries: 300
+
+    - name: Create load balancer
+      azure_rm_loadbalancer:
+        resource_group: '{{ az_resource_group_name }}'
+        name: '{{ unique_vmss_name[item.name] }}-lb'
+        location: '{{ item.az_location }}'
+        frontend_ip_configurations:
+        - name: "PublicIPAddress"
+          public_ip_address: '{{ unique_vmss_name[item.name] }}-ip'
+        backend_address_pools:
+        - name: backendaddrpool0
+        probes:
+        - name: prob0
+          port: "{{ azure_images[os_platform]['connection_port'] }}"
+          protocol: Tcp
+        load_balancing_rules:
+        - name: lbrbalancingrule0
+          frontend_ip_configuration: "PublicIPAddress"
+          backend_address_pool: backendaddrpool0
+          frontend_port: "{{ azure_images[os_platform]['connection_port'] }}"
+          backend_port: "{{ azure_images[os_platform]['connection_port'] }}"
+          protocol: Tcp
+          probe: prob0
+        tags: '{{ tagsForVmss }}'
+      when: item.assign_public_ip | default(assign_public_ip)
+      loop: '{{ molecule_yml.platforms }}'
+      changed_when: false
+      async: 7200
+      poll: 0
+      register: loadbalancers
+
+    - name: Wait for load balancer creation to complete
+      async_status:
+        jid: '{{ item.ansible_job_id }}'
+      when: not item.skipped | default(false)
+      loop: '{{ loadbalancers.results }}'
+      loop_control:
+        label: '{{ item.item.name }}'
+      register: loadbalancers_create
+      until: loadbalancers_create.finished
+      delay: 20
+      retries: 300
+
+    - name: Create VM Scale Set
+      azure_rm_resource:
+        resource_group: '{{ az_resource_group_name }}'
+        provider: compute
+        resource_type: virtualmachinescalesets
+        resource_name: '{{ unique_vmss_name[item.name] }}'
+        idempotency: true
+        body:
+          location: '{{ item.az_location }}'
+          tags: '{{ tagsForVmss }}'
+          sku:
+            name: '{{ item.vm_size }}'
+            tier: "Standard"
+            capacity: 1
+          properties:
+            overprovision: false
+            upgradePolicy:
+              mode: Automatic
+            virtualMachineProfile:
+              priority: Low
+              evictionPolicy: delete
+              storageProfile:
+                osDisk:
+                  caching: ReadWrite
+                  createOption: FromImage
+                imageReference:
+                  publisher: "{{ azure_images[os_platform][item.platform]['publisher'] }}"
+                  offer: "{{ azure_images[os_platform][item.platform]['offer'] }}"
+                  sku: "{{ azure_images[os_platform][item.platform]['sku'] }}"
+                  version: latest
+              osProfile: "{{ azure_images[os_platform]['azure_os_profile'] }}"
+              networkProfile:
+                networkInterfaceConfigurations:
+                  - Name: myVmss
+                    properties:
+                      primary: true
+                      networkSecurityGroup:
+                        id: "/subscriptions/0cfbdd57-0340-4c6d-a3f0-91c618995c6e/\
+                            resourceGroups/epm-ldi/providers/\
+                            Microsoft.Network/networkSecurityGroups/epm-ldi-northeurope-sg"
+                      ipConfigurations:
+                        - name: ipconfig1
+                          properties:
+                            subnet:
+                              id: "/subscriptions/0cfbdd57-0340-4c6d-a3f0-91c618995c6e/\
+                                  resourceGroups/epm-ldi/providers/\
+                                  Microsoft.Network/virtualNetworks/epm-ldi-northeurope-vnet/\
+                                  subnets/epm-ldi-northeurope-subnet"
+                            loadBalancerBackendAddressPools: >-
+                              {{ (item.assign_public_ip | default(assign_public_ip)) | ternary(withLoadBalancer, omit) }}
+              extensionProfile: "{{ azure_images[os_platform]['ext_profile'] }}"
+            singlePlacementGroup: true
+      loop: '{{ molecule_yml.platforms }}'
+      changed_when: false
+      register: vmss
+      async: 7200
+      poll: 0
+
+    - name: Wait for VMSS creation to complete
+      async_status:
+        jid: '{{ item.ansible_job_id }}'
+      loop: '{{ vmss.results }}'
+      loop_control:
+        label: '{{ item.item.name }}'
+      register: vmss_create
+      until: vmss_create.finished
+      delay: 20
+      retries: 300
+
+    - name: Get Instance ID
+      azure_rm_resource:
+        method: GET
+        url: "/subscriptions/{{ lookup('env','AZURE_SUBSCRIPTION_ID') }}\
+              /resourceGroups/{{ az_resource_group_name }}/providers/\
+              microsoft.Compute/virtualMachineScaleSets/\
+              {{ item.invocation.module_args.resource_name }}/virtualMachines/"
+      loop: '{{ vmss_create.results }}'
+      changed_when: false
+      no_log: true
+      register: vmss_instances_id
+
+    - name: Get Private IP
+      azure_rm_resource:
+          method: GET
+          url:  "/subscriptions/{{ lookup('env','AZURE_SUBSCRIPTION_ID') }}\
+                /resourceGroups/{{ az_resource_group_name }}/providers/\
+                microsoft.Compute/virtualMachineScaleSets/\
+                {{ item.item.invocation.module_args.resource_name }}/\
+                virtualMachines/{{ item.response.value[0].instanceId }}/networkInterfaces"
+      loop: '{{ vmss_instances_id.results }}'
+      changed_when: false
+      no_log: true
+      register: vmss_private_ip
+
+    - name: Populate instance config dict
+      set_fact:
+        instance_conf_dict:
+          instance: '{{ item.item.item.item.item.name }}'
+          address: >-
+            {{ (item.response.value[0].properties.ipConfigurations
+              | selectattr('properties.primary', 'equalto', true)
+              | first).properties.privateIPAddress }}
+          user: '{{ vm_admin_username }}' # common for all OSes, Azure specific
+          port: >-
+            {{ azure_images[os_platform]['connection_port'] }}
+          identity_file: '{{ keypair_path }}'
+          instance_ids: '{{ item.item.item.response.id }}'
+          connection: >-
+            {{ azure_images[os_platform]['connection_protocol'] }}
+      loop: '{{ vmss_private_ip.results }}'
+      loop_control:
+        label: '{{ item.item.item.item.item.name }}'
+      register: instance_config_dict
+      when: vmss_create.changed | bool
+      vars:
+        groups_item_var: '{{ item.item.item.item.item.groups }}'
+
+    - name: Convert instance config dict to a list
+      set_fact:
+        instance_conf: >-
+          {{ instance_config_dict.results
+            | map(attribute='ansible_facts.instance_conf_dict') | list }}
+      when: vmss_create.changed | bool
+
+    - name: Dump instance config
+      copy:
+        content: >-
+          {{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}
+        dest: '{{ molecule_instance_config }}'
+      when: vmss_create.changed | bool
+
+    - name: Wait for connection
+      wait_for:
+        port: '{{ item.port }}'
+        host: '{{ item.address }}'
+        delay: 0
+        sleep: 1
+        connect_timeout: 12
+        timeout: 420
+      loop: >-
+        {{ lookup('file', molecule_instance_config) | molecule_from_yaml }}
