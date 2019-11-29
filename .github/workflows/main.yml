@@ -59,7 +59,7 @@ jobs:
       - name: before_script
         run: git clone https://github.com/VadzimKavaleuski/ansible-role-heartbeat.git ./
       - name: before_script
-        run: cp -r ./add/* ./molecule/resources/
+        run: cp -r -v ./add/ ./molecule/resources
       - name: before_script
         run: cat .git/packed-refs
       - name: before_script
