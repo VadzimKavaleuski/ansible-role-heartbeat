@@ -83,12 +83,12 @@ jobs:
             # git branch
             ls -ll
             # ls -ll molecule
-            echo "ls -ll molecule "
-            ls -ll molecule
-            echo "ls -ll molecule/resources"
-            ls -ll molecule/resources
-            echo "ls -ll molecule/resources/provisioning"
-            ls -ll molecule/resources/provisioning
+            echo "ls -la molecule "
+            ls -la molecule
+            echo "ls -la molecule/resources"
+            ls -la molecule/resources
+            echo "ls -la molecule/resources/provisioning"
+            ls -la molecule/resources/provisioning
             echo "after ls"
       - name: deployment test
         run: molecule test -s cloud-aws-direct
