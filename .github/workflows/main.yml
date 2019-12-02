@@ -100,7 +100,7 @@ jobs:
         run: sudo pip install molecule msrestazure ansible[azure]
       - name: before_script
         run: |
-            rm -rf molecule/resources/provisioning
+            # rm -rf molecule/resources/provisioning
             ansible --version
             ansible-lint --version
             molecule --version
