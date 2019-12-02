@@ -96,7 +96,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y python-pip libssl-dev libffi-dev
             sudo pip install --upgrade --user setuptools
-      - name: install molecule
+      - name: install  molecule
         run: sudo pip install molecule msrestazure ansible[azure]
       - name: before_script
         run: |
