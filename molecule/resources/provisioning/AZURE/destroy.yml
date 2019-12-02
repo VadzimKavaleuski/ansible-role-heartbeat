@@ -11,7 +11,7 @@
     keypair_name: "molecule-key_\
       {{ lookup('env','MOLECULE_PROJECT_DIRECTORY').split('/')[-1] }}_\
       {{ lookup('env','MOLECULE_SCENARIO_NAME') }}"
-    az_resource_group_name: epm-ldi # hardcode!!!
+    az_resource_group_name: ldi # hardcode!!!
     az_location: northeurope # hardcode!!!
 
   tasks:
