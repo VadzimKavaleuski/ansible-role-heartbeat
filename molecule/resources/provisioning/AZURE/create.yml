@@ -249,14 +249,14 @@
                     properties:
                       primary: true
                       networkSecurityGroup:
-                        id: "/subscriptions/0cfbdd57-0340-4c6d-a3f0-91c618995c6e/\
+                        id: "/subscriptions/a9ff5d01-cc05-4003-b87f-55db3c27d7d2/\
                             resourceGroups/ldi/providers/\
                             Microsoft.Network/networkSecurityGroups/ldi-northeurope-sg"
                       ipConfigurations:
                         - name: ipconfig1
                           properties:
                             subnet:
-                              id: "/subscriptions/0cfbdd57-0340-4c6d-a3f0-91c618995c6e/\
+                              id: "/subscriptions/a9ff5d01-cc05-4003-b87f-55db3c27d7d2/\
                                   resourceGroups/ldi/providers/\
                                   Microsoft.Network/virtualNetworks/ldi-northeurope-vnet/\
                                   subnets/ldi-northeurope-subnet"
