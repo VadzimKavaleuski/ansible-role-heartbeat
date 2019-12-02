@@ -44,13 +44,13 @@ jobs:
   #           git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
   #     - name: deployment test
   #       run: molecule test -s default
-  platform_test_aws:
-    env:
-      AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
-      EC2_REGION: 'us-east-1'
-      # MOLECULE_DEBUG: true
-    # needs: lint_check
+  # platform_test_aws:
+  #   env:
+  #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
+  #     AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
+  #     EC2_REGION: 'us-east-1'
+  #     # MOLECULE_DEBUG: true
+  #   # needs: lint_check
     # runs-on: ubuntu-latest
     # steps:
     #   - uses: actions/checkout@v1
