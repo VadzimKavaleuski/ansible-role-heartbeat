@@ -24,7 +24,7 @@ jobs:
         with:
           targets: "./"
           args: "-c .ansible-lint"
-        
+
   lint_check:
     runs-on: ubuntu-latest
     steps:
