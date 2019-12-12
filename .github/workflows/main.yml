@@ -21,7 +21,7 @@ jobs:
         # replace "master" with any valid ref
         uses: ansible/ansible-lint-action@master
         with:
-          targets: ""
+          targets: "./ || ls -la /github/workspace"
           args: "-c .ansible-lint"
 
   lint_check:
