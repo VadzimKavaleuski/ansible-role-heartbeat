@@ -4,26 +4,27 @@ name: CI
 on: [push]
 
 jobs:
-  lint:
+  yamllint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
-      - name: befor lint
-        run: ls -la
       - name: yaml-lint
         uses: ibiqlik/action-yamllint@master
         with:
           file_or_dir: ./
           config_file: .yamllint
+  ansible_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: befor lint
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       - name: Lint Ansible Playbook
-        # replace "master" with any valid ref
         uses: ansible/ansible-lint-action@master
         with:
           targets: "./"
           args: "-c .ansible-lint"
-
+        
   lint_check:
     runs-on: ubuntu-latest
     steps:
