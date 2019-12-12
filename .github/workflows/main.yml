@@ -28,14 +28,14 @@ jobs:
 
   ansible_lint_docker:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-        - name: befor lint
-          run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
-        - name: Lint Ansible Playbook
-          uses: docker://cytopia/ansible-lint
-            with:
-              args: "-c ./data/.ansible-lint ./"
+    steps:
+      - uses: actions/checkout@v1
+      - name: befor lint
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+      - name: Lint Ansible Playbook
+        uses: docker://cytopia/ansible-lint
+          with:
+            args: "-c ./data/.ansible-lint ./"
 
     #  ansible_lint_docker:
     #   container: ubuntu-latest
