@@ -35,7 +35,8 @@ jobs:
       # - name: Lint Ansible Playbook
       - uses: docker://cytopia/ansible-lint
         with:
-          args: "-c ./data/.ansible-lint ./"
+          args: "-v -c ./data/.ansible-lint ./"
+          entrypoint: "ls -la"
 
     #  ansible_lint_docker:
     #   container: ubuntu-latest
@@ -47,8 +48,7 @@ jobs:
     #         uses: docker://cytopia/ansible-lint
     #           with:
     #             args: "-c ./data/.ansible-lint ./"
-                    
-            
+
   lint_check:
     runs-on: ubuntu-latest
     steps:
