@@ -7,7 +7,7 @@
   loop_control:
     loop_var: distrib_tasks
 
-- name: Configure settings block
+- name: Configure settings block  
   block:
     - name: Setup path folders
       file:
