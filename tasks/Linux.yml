@@ -5,7 +5,7 @@
     - '{{ ansible_os_family }}.yml'
     - not-supported.yml
   loop_control:
-    loop_var: distrib_tasks
+    loopvar: distrib_tasks
 
 - name: Configure settings block
   block:
