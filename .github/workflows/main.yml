@@ -20,6 +20,9 @@ jobs:
       - name: Lint Ansible Playbook
         # replace "master" with any valid ref
         uses: ansible/ansible-lint-action@master
+        with:
+          targets: ""
+          args: ""
 
   lint_check:
     runs-on: ubuntu-latest
