@@ -35,10 +35,10 @@ jobs:
             ansible-lint --version
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
-      - name: lint
-        run: |
-          yamllint . -c .yamllint
-          ansible-lint . -c .ansible-lint
+      - name: yamllint
+        run: yamllint . -c .yamllint
+      - name: ansible-lint
+        run: ansible-lint . -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
   # platform_test:
