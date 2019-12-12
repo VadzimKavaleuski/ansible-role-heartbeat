@@ -6,17 +6,17 @@ on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
-    # env:
-    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v1
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+      - name: befor lint
+        run: ls -la
       - name: yaml-lint
         uses: ibiqlik/action-yamllint@master
         with:
-          file_or_dir: ./**/*val*.yaml
-          config_file: .yamllint.yml      
+          file_or_dir: ./**/*.yaml
+          config_file: .yamllint
   lint_check:
     runs-on: ubuntu-latest
     steps:
