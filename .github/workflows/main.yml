@@ -27,7 +27,7 @@ jobs:
           args: "-c .ansible-lint"
 
   ansible_lint_docker:
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: befor lint
