@@ -33,7 +33,7 @@ jobs:
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       - name: Lint Ansible Playbook
-        uses: docker://cytopia/ansible-lint
+        uses: docker: //cytopia/ansible-lint
           with:
             args: "-c ./data/.ansible-lint ./"
 
