@@ -22,7 +22,7 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: ""
-          args: ""
+          args: "-c .ansible-lint"
 
   lint_check:
     runs-on: ubuntu-latest
