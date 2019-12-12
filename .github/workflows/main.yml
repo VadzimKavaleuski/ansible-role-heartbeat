@@ -43,7 +43,7 @@ jobs:
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
   platform_test:
-    needs: 
+    needs:
       - yamllint
       - ansible_lint
     runs-on: ubuntu-latest
