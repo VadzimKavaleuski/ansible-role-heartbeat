@@ -64,10 +64,13 @@ jobs:
           ls -la ~/
           git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
           ls -la ~/
+          pwd
       - name: yamllint
         run: yamllint . -c .yamllint
       - name: ansible-lint
-        run: ansible-lint . -v -c .ansible-lint
+        run: |
+          pwd
+          ansible-lint . -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
