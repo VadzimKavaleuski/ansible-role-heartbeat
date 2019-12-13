@@ -7,7 +7,7 @@ jobs:
   yamllint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: yaml-lint
         uses: ibiqlik/action-yamllint@master
         with:
@@ -17,7 +17,7 @@ jobs:
   ansible_lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: befor lint
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       - name: Lint Ansible Playbook
@@ -107,7 +107,7 @@ jobs:
           path: 'molecule/resources/provisioning'
       # - name: deployment test
       #   run: molecule test -s default
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.01
 
   # platform_test_aws:
   #   env:
