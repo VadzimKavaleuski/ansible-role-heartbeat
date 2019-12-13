@@ -34,9 +34,6 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-lint-rules'
           path: '~/ansible-lint-rules'
-      # - name: befor lint
-      #   run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
-      # - name: Lint Ansible Playbook
       - uses: docker://cytopia/ansible-lint
         # with:
           # args: "-v -c ./data/.ansible-lint ./"
@@ -77,11 +74,11 @@ jobs:
       - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: before_script
         run: |
             # sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev docker
+            sudo apt-get install -y python-pip libssl-dev libffi-dev
             sudo pip install --upgrade --user setuptools
       - name: install molecule
         run: |
@@ -96,6 +93,22 @@ jobs:
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s default
+
+  platform_test_container:
+    needs:
+      - yamllint
+      - ansible_lint_action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'lean-delivery/ansible-molecule-drivers'
+          path: 'molecule/resources/provisioning'
+      # - name: deployment test
+      #   run: molecule test -s default
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1
+
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
