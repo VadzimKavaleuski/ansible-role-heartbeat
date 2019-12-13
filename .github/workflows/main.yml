@@ -42,6 +42,32 @@ jobs:
           # args: "-v -c ./data/.ansible-lint ./"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
+  ansible_lint_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'lean-delivery/ansible-lint-rules'
+          path: '~/ansible-lint-rules'
+      # - name: befor lint
+      #   run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+      # - name: Lint Ansible Playbook
+      - uses: docker://cytopia/ansible-lint
+        # with:
+          # args: "-v -c ./data/.ansible-lint ./"
+          # entrypoint: "ansible-lint -v -c .ansible-lint ./"
+
+  ansible_lint_action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'lean-delivery/ansible-lint-rules'
+          path: '~/ansible-lint-rules'
+      - uses: action/ansible-lint
+
     #  ansible_lint_docker:
     #   container: ubuntu-latest
     #     steps:
