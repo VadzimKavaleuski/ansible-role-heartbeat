@@ -60,11 +60,14 @@ jobs:
             sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
             ansible-lint --version
       - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+        run: |
+          ls -la ~/
+          git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+          ls -la ~/
       - name: yamllint
         run: yamllint . -c .yamllint
       - name: ansible-lint
-        run: ansible-lint -v -c .ansible-lint ./
+        run: ansible-lint -v -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
