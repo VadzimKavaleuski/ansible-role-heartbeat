@@ -56,10 +56,10 @@ jobs:
   lint_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: before_script
         run: |
-            sudo apt-get update
+            # sudo apt-get update
             sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
             ansible-lint --version
       - name: befor lint
@@ -70,6 +70,7 @@ jobs:
         run: ansible-lint -v -c .ansible-lint ./
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
+
   platform_test:
     needs:
       - yamllint
@@ -95,66 +96,66 @@ jobs:
             git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
       - name: deployment test
         run: molecule test -s default
-  platform_test_aws:
-    env:
-      AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
-      EC2_REGION: 'us-east-1'
-      # MOLECULE_DEBUG: true
-    # needs: lint_check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: before_script
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev
-            sudo pip install --upgrade --user setuptools
-      - name: install molecule
-        run: sudo pip install molecule boto boto3 botocore
-      # - name: prepare aws creds
-      #   run: |
-      #       mkdir .aws
-      #       touch .aws/credentials
-      #       echo "[default]\n" >>.aws/credentials
-      #       echo aws_access_key_id=$aws_access_key_id\n >>.aws/credentials
-      #       echo aws_secret_access_key=$aws_secret_access_key\n >>.aws/credentials
-      #       cat .aws/credentials
-      - name: before_script
-        run: |
-            # rm -rf molecule/resources/provisioning
-            ip address
-            ansible --version
-            ansible-lint --version
-            molecule --version
-            pip list boto | grep boto
-      - name: deployment test
-        run: molecule test -s cloud-aws-direct
-  platform_test_azure:
-    env:
-      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
-      AZURE_SECRET: ${{secrets.AZURE_SECRET}}
-      AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
-      AZURE_TENANT: ${{secrets.AZURE_TENANT}}
-      EC2_REGION: 'us-east-1'
-      MOLECULE_DEBUG: true
-    # needs: lint_check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: before_script
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev
-            sudo pip install --upgrade --user setuptools
-      - name: install  molecule
-        run: sudo pip install molecule msrestazure ansible[azure]
-      - name: before_script
-        run: |
-            # rm -rf molecule/resources/provisioning
-            ansible --version
-            ansible-lint --version
-            molecule --version
-            # git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
-      - name: deployment test
-        run: molecule test -s cloud-azure-direct
+  # platform_test_aws:
+  #   env:
+  #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
+  #     AWS_SECRET_ACCESS_KEY: ${{secrets.aws_secret_access_key}}
+  #     EC2_REGION: 'us-east-1'
+  #     # MOLECULE_DEBUG: true
+  #   # needs: lint_check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: before_script
+  #       run: |
+  #           sudo apt-get update
+  #           sudo apt-get install -y python-pip libssl-dev libffi-dev
+  #           sudo pip install --upgrade --user setuptools
+  #     - name: install molecule
+  #       run: sudo pip install molecule boto boto3 botocore
+  #     # - name: prepare aws creds
+  #     #   run: |
+  #     #       mkdir .aws
+  #     #       touch .aws/credentials
+  #     #       echo "[default]\n" >>.aws/credentials
+  #     #       echo aws_access_key_id=$aws_access_key_id\n >>.aws/credentials
+  #     #       echo aws_secret_access_key=$aws_secret_access_key\n >>.aws/credentials
+  #     #       cat .aws/credentials
+  #     - name: before_script
+  #       run: |
+  #           # rm -rf molecule/resources/provisioning
+  #           ip address
+  #           ansible --version
+  #           ansible-lint --version
+  #           molecule --version
+  #           pip list boto | grep boto
+  #     - name: deployment test
+  #       run: molecule test -s cloud-aws-direct
+  # platform_test_azure:
+  #   env:
+  #     AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+  #     AZURE_SECRET: ${{secrets.AZURE_SECRET}}
+  #     AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+  #     AZURE_TENANT: ${{secrets.AZURE_TENANT}}
+  #     EC2_REGION: 'us-east-1'
+  #     MOLECULE_DEBUG: true
+  #   # needs: lint_check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: before_script
+  #       run: |
+  #           sudo apt-get update
+  #           sudo apt-get install -y python-pip libssl-dev libffi-dev
+  #           sudo pip install --upgrade --user setuptools
+  #     - name: install  molecule
+  #       run: sudo pip install molecule msrestazure ansible[azure]
+  #     - name: before_script
+  #       run: |
+  #           # rm -rf molecule/resources/provisioning
+  #           ansible --version
+  #           ansible-lint --version
+  #           molecule --version
+  #           # git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
+  #     - name: deployment test
+  #       run: molecule test -s cloud-azure-direct
