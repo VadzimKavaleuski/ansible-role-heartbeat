@@ -38,9 +38,9 @@ jobs:
       #   run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
       # - name: Lint Ansible Playbook
       - uses: docker://cytopia/ansible-lint
-        with:
+        # with:
           # args: "-v -c ./data/.ansible-lint ./"
-          entrypoint: "ansible-lint -v -c .ansible-lint ./"
+          # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
     #  ansible_lint_docker:
     #   container: ubuntu-latest
