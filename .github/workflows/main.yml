@@ -67,7 +67,7 @@ jobs:
       - name: yamllint
         run: yamllint . -c .yamllint
       - name: ansible-lint
-        run: ansible-lint -v -c .ansible-lint
+        run: ansible-lint . -v -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
