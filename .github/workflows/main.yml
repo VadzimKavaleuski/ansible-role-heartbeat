@@ -107,7 +107,7 @@ jobs:
           path: 'molecule/resources/provisioning'
       # - name: deployment test
       #   run: molecule test -s default
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.01
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.02
 
   # platform_test_aws:
   #   env:
