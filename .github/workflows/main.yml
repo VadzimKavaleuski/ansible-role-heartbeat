@@ -74,13 +74,13 @@ jobs:
   platform_test:
     needs:
       - yamllint
-      - ansible_lint
+      - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: before_script
         run: |
-            sudo apt-get update
+            # sudo apt-get update
             sudo apt-get install -y python-pip libssl-dev libffi-dev docker
             sudo pip install --upgrade --user setuptools
       - name: install molecule
