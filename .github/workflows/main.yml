@@ -50,7 +50,7 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-lint-rules'
           path: '~/ansible-lint-rules'
-      - uses: VadzimKavaleuski/ansible-lint@latest
+      - uses: VadzimKavaleuski/ansible-lint@v1
 
     #  ansible_lint_docker:
     #   container: ubuntu-latest
