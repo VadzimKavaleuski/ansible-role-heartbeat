@@ -110,7 +110,7 @@ jobs:
       # - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.04
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
-          entrypoint: "molecule test -s default"
+          entrypoint: "molecule"
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
