@@ -39,7 +39,7 @@ jobs:
       # - name: Lint Ansible Playbook
       - uses: docker://cytopia/ansible-lint
         with:
-          args: "-v -c ./data/.ansible-lint ./"
+          # args: "-v -c ./data/.ansible-lint ./"
           entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
     #  ansible_lint_docker:
