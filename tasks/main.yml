@@ -10,7 +10,7 @@
 - name: Load a variable file based on the service manager
   include_vars: '{{ service_manager }}'
   with_first_found:
-    - '{{ ansible_service_mgr }}.yml'
+    - '{{ Ansible_service_mgr }}.yml'
     - systemv.yml
   loop_control:
     loop_var: service_manager
@@ -19,7 +19,7 @@
     - name: Fetch release page
       uri:
         url: 'https://api.github.com/repos/elastic/elasticsearch/releases/latest'
-        return_content: false
+        return_content: False
       register: root_page
 
     - name: Find release version
