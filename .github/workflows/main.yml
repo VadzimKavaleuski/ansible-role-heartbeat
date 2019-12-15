@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-lint-rules'
-          path: '~/ansible-lint-rules'
+          path: './ansible-lint-rules'
       - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
@@ -70,7 +70,7 @@ jobs:
           ls -la
           ansible-lint . -c .ansible-lint
       - name: after lint
-        run: rm -rf ~/ansible-lint-rules
+        run: rm -rf ./ansible-lint-rules
 
   platform_test:
     needs:
