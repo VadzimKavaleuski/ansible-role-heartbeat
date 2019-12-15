@@ -3,6 +3,6 @@ exclude_paths:
  - ./molecule/
  - ./.github/workflows/
 rulesdir:
-  - ~/ansible-lint-rules/rules/
+  - ./ansible-lint-rules/rules/
 use_default_rules: true
 verbosity: 1
