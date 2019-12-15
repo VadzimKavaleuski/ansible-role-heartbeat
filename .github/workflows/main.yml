@@ -126,11 +126,11 @@ jobs:
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
-          args: 'test --help'
+          args: '--help'
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
-          args: -vvv test -s default
+          args: test -s default
 
   # platform_test_aws:
   #   env:
