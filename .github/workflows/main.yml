@@ -112,25 +112,25 @@ jobs:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
       # - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.04
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          entrypoint: "pwd"
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          entrypoint: "ls"
-          args: '-la'
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          entrypoint: "ls"
-          args: './molecule/resources/provisioning -la'
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   with:
+      #     entrypoint: "pwd"
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   with:
+      #     entrypoint: "ls"
+      #     args: '-la'
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   with:
+      #     entrypoint: "ls"
+      #     args: './molecule/resources/provisioning -la'
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   with:
+      #     entrypoint: molecule
+      #     args: '--version'
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
-          args: '--version'
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          entrypoint: molecule
-          args: test -s default
+          args: test -s default -v
 
   # platform_test_aws:
   #   env:
