@@ -113,7 +113,7 @@ jobs:
       - name: install molecule
         run: |
             sudo pip install molecule
-            sudo pip install 'molecule[docker]'        
+            sudo pip install 'molecule[docker]'
       - name: before_script
         run: rm -rf ./molecule/resources/provisioning
       - uses: actions/checkout@v2
