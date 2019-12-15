@@ -32,12 +32,12 @@
         src: '{{ hb_service_script }}.j2'
         dest: '{{ hb_service_path }}/{{ hb_service_script }}'
         mode: '{{ hb_service_script_mode }}'
-        force: yes
+        force: true
       notify: '{{ hb_service_handlers }}'
 
     - name: Start heartbeat
       service:
         name:  '{{ heartbeat_package_name }}'
         state: started
-        enabled: TRUE
+        enabled: true
   become: true
