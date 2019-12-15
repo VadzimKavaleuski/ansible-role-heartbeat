@@ -78,6 +78,8 @@ jobs:
       - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
+      - name: pwd
+        run: pwd
       - uses: actions/checkout@v2
       - name: before_script
         run: |
@@ -90,7 +92,7 @@ jobs:
             sudo pip install 'molecule[docker]'
       - name: before_script
         run: |
-            rm -rf molecule/resources/provisioning
+            rm -rf ./molecule/resources/provisioning
             ansible --version
             ansible-lint --version
             molecule --version
@@ -98,6 +100,8 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
+      - name: pwd
+        run: pwd
       - name: deployment test
         run: molecule test -s default
 
