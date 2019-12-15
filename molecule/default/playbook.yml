@@ -2,4 +2,4 @@
 - name: Converge
   hosts: all
   roles:
-  - ansible-role-heartbeat
+  - role: ansible-role-heartbeat
