@@ -22,9 +22,9 @@ jobs:
         run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
       - name: Lint Ansible Playbook
         uses: ansible/ansible-lint-action@master
-        with:
+    #    with:
     #      targets: "./"
-          args: ". -c .ansible-lint"
+    #      args: ". -c .ansible-lint"
 
   ansible_lint_docker:
     runs-on: ubuntu-latest
