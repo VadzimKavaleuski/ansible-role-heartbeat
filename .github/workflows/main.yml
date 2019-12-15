@@ -106,13 +106,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: before_script
-        run: rm -rf molecule/resources/provisioning
+        run: rm -rf ./molecule/resources/provisioning
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
-      # - name: deployment test
-      #   run: molecule test -s default
+      - name: deployment test
+        run: molecule test -s default
       # - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.04
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
