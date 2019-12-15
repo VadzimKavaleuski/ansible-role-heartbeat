@@ -68,7 +68,8 @@ jobs:
           pwd
           cat .ansible-lint
           ls -la
-          ansible-lint . -c -v .ansible-lint
+          ansible-lint . -L -c .ansible-lint
+          ansible-lint . -v -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
