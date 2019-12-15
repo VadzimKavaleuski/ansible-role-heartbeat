@@ -24,7 +24,7 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: "./"
-          args: "-c .ansible-lint"
+          args: ". -c .ansible-lint"
 
   ansible_lint_docker:
     runs-on: ubuntu-latest
