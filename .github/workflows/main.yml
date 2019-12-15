@@ -79,7 +79,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pwd
-        run: pwd
+        run: |
+          pwd
+          ls -la
       - uses: actions/checkout@v2
       - name: before_script
         run: |
@@ -101,7 +103,9 @@ jobs:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
       - name: pwd
-        run: pwd
+        run: |
+          pwd
+          ls -la
       - name: deployment test
         run: molecule test -s default
 
