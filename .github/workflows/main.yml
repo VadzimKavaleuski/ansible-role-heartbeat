@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
       - name: Lint Ansible Playbook
         uses: ansible/ansible-lint-action@master
         with:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-lint-rules'
-          path: '~/ansible-lint-rules'
+          path: './ansible-lint-rules'
       - uses: docker://cytopia/ansible-lint
         with:
           args: ". -v -c ./data/.ansible-lint"
@@ -60,7 +60,7 @@ jobs:
             sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
             ansible-lint --version
       - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
       - name: yamllint
         run: yamllint . -c .yamllint
       - name: ansible-lint
