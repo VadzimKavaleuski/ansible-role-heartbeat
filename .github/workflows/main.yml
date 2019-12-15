@@ -36,7 +36,7 @@ jobs:
           path: './ansible-lint-rules'
       - uses: docker://cytopia/ansible-lint
         with:
-          args: ". -c .ansible-lint"
+          args: ". -c .ansible-lint --force-color"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
   ansible_lint_action:
@@ -68,7 +68,7 @@ jobs:
           pwd
           cat .ansible-lint
           ls -la
-          ansible-lint . -c .ansible-lint
+          ansible-lint . -c .ansible-lint --force-color
       - name: after lint
         run: rm -rf ./ansible-lint-rules
 
