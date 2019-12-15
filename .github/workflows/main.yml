@@ -47,7 +47,7 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-lint-rules'
           path: '~/ansible-lint-rules'
-      - uses: VadzimKavaleuski/ansible-lint@v1.03
+      - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
   lint_check:
