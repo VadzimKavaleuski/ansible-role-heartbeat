@@ -23,8 +23,8 @@ jobs:
       - name: Lint Ansible Playbook
         uses: ansible/ansible-lint-action@master
         with:
-          targets: "./"
-          args: ". -c .ansible-lint"
+    #      targets: "./"
+          args: ". -v -c .ansible-lint"
 
   ansible_lint_docker:
     runs-on: ubuntu-latest
@@ -35,8 +35,8 @@ jobs:
           repository: 'lean-delivery/ansible-lint-rules'
           path: '~/ansible-lint-rules'
       - uses: docker://cytopia/ansible-lint
-        # with:
-          # args: "-v -c ./data/.ansible-lint ./"
+        with:
+          args: ". -v -c ./data/.ansible-lint"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
   ansible_lint_action:
