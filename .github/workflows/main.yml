@@ -70,7 +70,8 @@ jobs:
       - name: ansible-lint
         run: |
           pwd
-          ansible-lint . -c .ansible-lint
+          cat .ansible-lint
+          ansible-lint . -c -vvv .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
