@@ -36,7 +36,7 @@ jobs:
           path: './ansible-lint-rules'
       - uses: docker://cytopia/ansible-lint
         with:
-          args: ". -v -c ./data/.ansible-lint"
+          args: ". -c ./data/.ansible-lint"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
   ansible_lint_action:
