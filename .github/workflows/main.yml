@@ -98,8 +98,8 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
-    - name: deployment test
-      run: molecule test -s default
+      - name: deployment test
+        run: molecule test -s default
 
   platform_test_container:
     needs:
