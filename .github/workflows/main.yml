@@ -14,29 +14,29 @@ jobs:
           file_or_dir: ./
           config_file: .yamllint
 
-  ansible_lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
-      - name: Lint Ansible Playbook
-        uses: ansible/ansible-lint-action@master
-        with:
-          targets: "./"
-          args: ". -c .ansible-lint"
+#  ansible_lint:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: befor lint
+#        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
+#      - name: Lint Ansible Playbook
+#        uses: ansible/ansible-lint-action@master
+#        with:
+#          targets: "./"
+#          args: ". -c .ansible-lint"
 
-  ansible_lint_docker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-lint-rules'
-          path: './ansible-lint-rules'
-      - uses: docker://cytopia/ansible-lint
-        with:
-          args: ". -c .ansible-lint --force-color"
+#  ansible_lint_docker:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
+#        with:
+#          repository: 'lean-delivery/ansible-lint-rules'
+#          path: './ansible-lint-rules'
+#      - uses: docker://cytopia/ansible-lint
+#        with:
+#          args: ". -c .ansible-lint --force-color"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
   ansible_lint_action:
@@ -50,53 +50,53 @@ jobs:
       - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
-  lint_check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: before_script
-        run: |
-            # sudo apt-get update
-            sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
-            ansible-lint --version
-      - name: yamllint
-        run: yamllint . -c .yamllint
-      - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
-      - name: ansible-lint
-        run: |
-          pwd
-          cat .ansible-lint
-          ls -la
-          ansible-lint . -c .ansible-lint --force-color
-      - name: after lint
-        run: rm -rf ./ansible-lint-rules
+#  lint_check:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: before_script
+#        run: |
+#            # sudo apt-get update
+#            sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
+#            ansible-lint --version
+#      - name: yamllint
+#        run: yamllint . -c .yamllint
+#      - name: befor lint
+#        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
+#      - name: ansible-lint
+#        run: |
+#          pwd
+#          cat .ansible-lint
+#          ls -la
+#          ansible-lint . -c .ansible-lint --force-color
+#      - name: after lint
+#        run: rm -rf ./ansible-lint-rules
 
-  platform_test:
-    needs:
-      - yamllint
-      - ansible_lint_action
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: before_script
-        run: |
-            # sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev
-            sudo pip install --upgrade --user setuptools
-      - name: install molecule
-        run: |
-            sudo pip install molecule
-            sudo pip install 'molecule[docker]'
-      - name: before_script
-        run: |
-            rm -rf molecule/resources/provisioning
-            ansible --version
-            ansible-lint --version
-            molecule --version
-            git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
-      - name: deployment test
-        run: molecule test -s default
+#  platform_test:
+#    needs:
+#      - yamllint
+#      - ansible_lint_action
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: before_script
+#        run: |
+#            # sudo apt-get update
+#            sudo apt-get install -y python-pip libssl-dev libffi-dev
+#            sudo pip install --upgrade --user setuptools
+#      - name: install molecule
+#        run: |
+#            sudo pip install molecule
+#            sudo pip install 'molecule[docker]'
+#      - name: before_script
+#        run: |
+#            rm -rf molecule/resources/provisioning
+#            ansible --version
+#            ansible-lint --version
+#            molecule --version
+#            git clone https://github.com/lean-delivery/ansible-molecule-drivers.git molecule/resources/provisioning
+#      - name: deployment test
+#        run: molecule test -s default
 
   platform_test_container:
     needs:
@@ -117,10 +117,11 @@ jobs:
           entrypoint: "pwd"
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
-          entrypoint: "ls -la"
+          entrypoint: "ls"
+          args: '-la'
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
-          entrypoint: "molecule"
+          entrypoint: molecule
           args: 'test -s default'
 
   # platform_test_aws:
