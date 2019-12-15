@@ -111,8 +111,6 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
-      - name: deployment test
-        run: molecule test -s default
       # - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.04
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
