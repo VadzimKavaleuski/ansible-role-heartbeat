@@ -24,7 +24,7 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
     #      targets: "./"
-          args: ". -v -c .ansible-lint"
+          args: ". -c .ansible-lint"
 
   ansible_lint_docker:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           path: './ansible-lint-rules'
       - uses: docker://cytopia/ansible-lint
         with:
-          args: ". -c ./data/.ansible-lint"
+          args: ". -c .ansible-lint"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
   ansible_lint_action:
@@ -59,17 +59,16 @@ jobs:
             # sudo apt-get update
             sudo apt-get install -y ansible-lint libssl-dev libffi-dev yamllint
             ansible-lint --version
-      - name: befor lint
-        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
       - name: yamllint
         run: yamllint . -c .yamllint
+      - name: befor lint
+        run: git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
       - name: ansible-lint
         run: |
           pwd
           cat .ansible-lint
           ls -la
-          ansible-lint . -L -c .ansible-lint
-          ansible-lint . -v -c .ansible-lint
+          ansible-lint . -c .ansible-lint
       - name: after lint
         run: rm -rf ~/ansible-lint-rules
 
