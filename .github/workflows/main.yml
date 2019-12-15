@@ -119,10 +119,10 @@ jobs:
         with:
           entrypoint: "ls"
           args: '-la'
-          - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-          with:
-            entrypoint: "ls"
-            args: 'molecule -la'
+      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+        with:
+          entrypoint: "ls"
+          args: 'molecule -la'
         - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
