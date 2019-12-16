@@ -115,9 +115,13 @@ jobs:
       - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
+      - name: pwd
+        run: pwd
       - uses: actions/checkout@v2
       - name: before_script
         run: rm -rf ./molecule/resources/provisioning
+      - name: pwd
+        run: pwd
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
@@ -138,6 +142,10 @@ jobs:
       #   with:
       #     entrypoint: ./start.sh
           # args: '--help'
+      # - name: before_script
+      #   run: cd ../..
+      - name: pwd
+        run: pwd
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
