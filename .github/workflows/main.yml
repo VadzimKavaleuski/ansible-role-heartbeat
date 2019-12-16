@@ -166,9 +166,10 @@ jobs:
           # working-directory: /home/runner/work
           args: |
             /bin/sh -c "ls -la /github&&
-            mkdir -p /github/$GITHUB_REPOSITORY&&
-            mv /github/workspace /github/$GITHUB_REPOSITORY&&
-            cd /github/$GITHUB_REPOSITORY&&
+            mkdir -p /github/ansible-role-heartbeat&&
+            ls -la /github&&
+            cp /github/workspace /github/ansible-role-heartbeat&&
+            cd /github/ansible-role-heartbeat&&
             pwd&&
             ls -la&&
             molecule test -s default"
