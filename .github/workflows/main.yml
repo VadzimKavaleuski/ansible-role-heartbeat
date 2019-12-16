@@ -148,9 +148,10 @@ jobs:
         run: pwd
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
-          path: /home/runner/work
+          # path: /home/runner/work
           entrypoint: molecule
           args: --debug test -s default
+          working-directory: ./../..
 
   # platform_test_aws:
   #   env:
