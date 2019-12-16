@@ -146,19 +146,24 @@ jobs:
           # args: '--help'
       # - name: before_script
       #   run: cd /home/runner/work
-      # - name: pwd
-      #   run: pwd
+      - name: pwd
+        run: echo GITHUB_ACTION=$GITHUB_ACTION
+        - name: pwd
+        run: echo GITHUB_ACTIONS=$GITHUB_ACTIONS
+        - name: pwd
+        run: echo GITHUB_REPOSITORY=$GITHUB_REPOSITORY
       # - name: start molecule in docker
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        env:
-          GITHUB_WORKSPACE: /home/runner/work
-          GITHUB_ACTIONS: "false"
+        # env:
+        #   GITHUB_WORKSPACE: /home/runner/work
+        #   GITHUB_ACTIONS: "false"
         with:
           # path: /home/runner/work
-          entrypoint: molecule
-          GITHUB_ACTIONS: "false"
-          args: --debug test -s default
+          # entrypoint: molecule
+          # GITHUB_ACTIONS: "false"
+          # args: --debug test -s default
           # working-directory: /home/runner/work
+          args: /bin/sh -c "echo $GITHUB_REPOSITORY&&mkdir /github/($GITHUB_REPOSITORY)&&ln /github/workspace mkdir /github/($GITHUB_REPOSITORY)&&cd mkdir /github/($GITHUB_REPOSITORY)&&molecule test -s default"
 
   # platform_test_aws:
   #   env:
