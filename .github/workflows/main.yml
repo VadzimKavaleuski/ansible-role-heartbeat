@@ -175,7 +175,7 @@ jobs:
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
-            ls -la /github/workspace&&
+            (ls -la /github/workspace||echo 'opa')&&
             molecule test -s default"
 
   # platform_test_aws:
