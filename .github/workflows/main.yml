@@ -115,6 +115,8 @@ jobs:
       - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
+        env:
+          GITHUB_WORKSPACE: /home/runner/work
       - name: pwd
         run: pwd
       - uses: actions/checkout@v2
