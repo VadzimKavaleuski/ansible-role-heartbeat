@@ -142,8 +142,8 @@ jobs:
       #   with:
       #     entrypoint: ./start.sh
           # args: '--help'
-      # - name: before_script
-      #   run: cd ../..
+      - name: before_script
+        run: cd /home/runner/work
       - name: pwd
         run: pwd
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
