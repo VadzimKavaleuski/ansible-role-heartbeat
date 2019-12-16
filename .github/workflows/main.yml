@@ -148,9 +148,9 @@ jobs:
       #   run: cd /home/runner/work
       - name: pwd
         run: echo GITHUB_ACTION=$GITHUB_ACTION
-        - name: pwd
+      - name: pwd
         run: echo GITHUB_ACTIONS=$GITHUB_ACTIONS
-        - name: pwd
+      - name: pwd
         run: echo GITHUB_REPOSITORY=$GITHUB_REPOSITORY
       # - name: start molecule in docker
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
