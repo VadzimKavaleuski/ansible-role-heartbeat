@@ -151,7 +151,7 @@ jobs:
           # path: /home/runner/work
           entrypoint: molecule
           args: --debug test -s default
-          working-directory: /home/runner/work
+        working-directory: /home/runner/work
 
   # platform_test_aws:
   #   env:
