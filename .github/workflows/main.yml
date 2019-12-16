@@ -164,22 +164,26 @@ jobs:
           # GITHUB_ACTIONS: "false"
           # args: --debug test -s default
           # working-directory: /home/runner/work
+          # args: |
+          #   /bin/sh -c "
+          #   mkdir -p /github/${GITHUB_REPOSITORY}&&
+          #   ls -la /github&&
+          #   cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
+          #   cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
+          #   cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
+          #   cd /github/${GITHUB_REPOSITORY}&&
+          #   pwd&&
+          #   ls -la&&
+          #   (ls -la /github/workspace||echo 'opa')&&
+          #   molecule test -s default"
           args: |
-            /bin/sh -c "ls -la /github/workspace&&
-            cd /github&&
-            echo ${GITHUB_REPOSITORY}
-            echo $GITHUB_REPOSITORY
+            /bin/sh -c "
             mkdir -p /github/${GITHUB_REPOSITORY}&&
-            ls -la /github&&
-            cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
-            cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
-            cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
+            ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
-            (ls -la /github/workspace||echo 'opa')&&
             molecule test -s default"
-
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
