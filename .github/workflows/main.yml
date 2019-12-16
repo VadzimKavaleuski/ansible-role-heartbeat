@@ -171,7 +171,7 @@ jobs:
             echo $GITHUB_REPOSITORY
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
-            mv /github/workspace /github/${GITHUB_REPOSITORY}&&
+            cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
