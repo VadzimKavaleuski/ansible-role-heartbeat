@@ -4,15 +4,15 @@ name: CI
 on: [push]
 
 jobs:
-  yamllint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: yaml-lint
-        uses: ibiqlik/action-yamllint@master
-        with:
-          file_or_dir: ./
-          config_file: .yamllint
+  # yamllint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: yaml-lint
+  #       uses: ibiqlik/action-yamllint@master
+  #       with:
+  #         file_or_dir: ./
+  #         config_file: .yamllint
 
 #  ansible_lint:
 #    runs-on: ubuntu-latest
@@ -39,15 +39,15 @@ jobs:
 #          args: ". -c .ansible-lint --force-color"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
-  ansible_lint_action:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-lint-rules'
-          path: './ansible-lint-rules'
-      - uses: VadzimKavaleuski/ansible-lint@v1.04
+  # ansible_lint_action:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: 'lean-delivery/ansible-lint-rules'
+  #         path: './ansible-lint-rules'
+  #     - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
 #  lint_check:
@@ -112,9 +112,9 @@ jobs:
   platform_test_container:
     # env:
     #   GITHUB_ACTIONS: false
-    needs:
-      - yamllint
-      - ansible_lint_action
+    # needs:
+    #   - yamllint
+    #   - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
       - name: pwd
@@ -166,14 +166,12 @@ jobs:
           # working-directory: /home/runner/work
           args: |
             /bin/sh -c "ls -la /github&&
-            mkdir -p /github/ansible-role-heartbeat&&
-            ls -la /github&&
             echo ${GITHUB_REPOSITORY}
             echo $GITHUB_REPOSITORY
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
-            mv /github/workspace/* /github/ansible-role-heartbeat/&&
-            cd /github/ansible-role-heartbeat&&
+            mv /github/workspace/* /github/${GITHUB_REPOSITORY}&&
+            cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
             molecule test -s default"
