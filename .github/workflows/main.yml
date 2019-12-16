@@ -180,7 +180,7 @@ jobs:
             /bin/sh -c "
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
-            cd /github/${GITHUB_REPOSITORY}&&
+            cd /github/${GITHUB_REPOSITORY}/workspace&&
             pwd&&
             ls -la&&
             molecule test -s default"
