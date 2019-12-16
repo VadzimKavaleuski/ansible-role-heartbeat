@@ -72,42 +72,42 @@ jobs:
 #      - name: after lint
 #        run: rm -rf ./ansible-lint-rules
 
-  platform_test:
-    needs:
-      - yamllint
-      - ansible_lint_action
-    runs-on: ubuntu-latest
-    steps:
-      - name: pwd
-        run: |
-          pwd
-          ls -la
-      - uses: actions/checkout@v2
-      - name: before_script
-        run: |
-            # sudo apt-get update
-            sudo apt-get install -y python-pip libssl-dev libffi-dev
-            sudo pip install --upgrade --user setuptools
-      - name: install molecule
-        run: |
-            sudo pip install molecule
-            sudo pip install 'molecule[docker]'
-      - name: before_script
-        run: |
-            rm -rf ./molecule/resources/provisioning
-            ansible --version
-            ansible-lint --version
-            molecule --version
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-molecule-drivers'
-          path: './molecule/resources/provisioning'
-      - name: pwd
-        run: |
-          pwd
-          ls -la
-      - name: deployment test
-        run: molecule test -s default
+  # platform_test:
+  #   needs:
+  #     - yamllint
+  #     - ansible_lint_action
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: pwd
+  #       run: |
+  #         pwd
+  #         ls -la
+  #     - uses: actions/checkout@v2
+  #     - name: before_script
+  #       run: |
+  #           # sudo apt-get update
+  #           sudo apt-get install -y python-pip libssl-dev libffi-dev
+  #           sudo pip install --upgrade --user setuptools
+  #     - name: install molecule
+  #       run: |
+  #           sudo pip install molecule
+  #           sudo pip install 'molecule[docker]'
+  #     - name: before_script
+  #       run: |
+  #           rm -rf ./molecule/resources/provisioning
+  #           ansible --version
+  #           ansible-lint --version
+  #           molecule --version
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: 'lean-delivery/ansible-molecule-drivers'
+  #         path: './molecule/resources/provisioning'
+  #     - name: pwd
+  #       run: |
+  #         pwd
+  #         ls -la
+  #     - name: deployment test
+  #       run: molecule test -s default
 
   platform_test_container:
     needs:
@@ -148,15 +148,15 @@ jobs:
       #   run: pwd
       # - name: start molecule in docker
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+        env:
+          GITHUB_WORKSPACE: /home/runner/work
+          GITHUB_ACTIONS: false
         with:
           # path: /home/runner/work
           entrypoint: molecule
           args: --debug test -s default
           # working-directory: /home/runner/work
-        env:
-          GITHUB_WORKSPACE: /home/runner/work
-          GITHUB_ACTIONS: false
-
+  
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
