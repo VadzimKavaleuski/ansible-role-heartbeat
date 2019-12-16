@@ -146,12 +146,13 @@ jobs:
         run: cd /home/runner/work
       - name: pwd
         run: pwd
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      - name: start molecule in docker
+        working-directory: /home/runner/work
+        uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           # path: /home/runner/work
           entrypoint: molecule
           args: --debug test -s default
-        working-directory: /home/runner/work
 
   # platform_test_aws:
   #   env:
