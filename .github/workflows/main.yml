@@ -152,10 +152,11 @@ jobs:
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         env:
           GITHUB_WORKSPACE: /home/runner/work
-          GITHUB_ACTIONS: false
+          GITHUB_ACTIONS: "false"
         with:
           # path: /home/runner/work
           entrypoint: molecule
+          GITHUB_ACTIONS: "false"
           args: --debug test -s default
           # working-directory: /home/runner/work
 
