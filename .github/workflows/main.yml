@@ -117,13 +117,13 @@ jobs:
     #   - ansible_lint_action
     runs-on: ubuntu-latest
     steps:
-      - name: pwd
-        run: pwd
+      # - name: pwd
+      #   run: pwd
       - uses: actions/checkout@v2
       - name: before_script
         run: rm -rf ./molecule/resources/provisioning
-      - name: pwd
-        run: pwd
+      # - name: pwd
+      #   run: pwd
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
@@ -146,18 +146,18 @@ jobs:
           # args: '--help'
       # - name: before_script
       #   run: cd /home/runner/work
-      - name: pwd
-        run: echo GITHUB_ACTION=$GITHUB_ACTION
-      - name: pwd
-        run: echo GITHUB_ACTIONS=$GITHUB_ACTIONS
-      - name: pwd
-        run: echo GITHUB_REPOSITORY=$GITHUB_REPOSITORY
+      # - name: pwd
+      #   run: echo GITHUB_ACTION=$GITHUB_ACTION
+      # - name: pwd
+      #   run: echo GITHUB_ACTIONS=$GITHUB_ACTIONS
+      # - name: pwd
+      #   run: echo GITHUB_REPOSITORY=$GITHUB_REPOSITORY
       # - name: start molecule in docker
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        env:
-          ROLE_SUB_PATH:
-          GITHUB_WORKSPACE: /home/runner/work
-          GITHUB_ACTION: "false"
+        # env:
+        #   ROLE_SUB_PATH:
+        #   GITHUB_WORKSPACE: /home/runner/work
+        #   GITHUB_ACTION: "false"
         with:
           # path: /home/runner/work
           # entrypoint: molecule
@@ -165,15 +165,17 @@ jobs:
           # args: --debug test -s default
           # working-directory: /home/runner/work
           args: |
-            /bin/sh -c "ls -la /github&&
+            /bin/sh -c "ls -la /github/workspace&&
+            cd /github&&
             echo ${GITHUB_REPOSITORY}
             echo $GITHUB_REPOSITORY
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
-            mv /github/workspace/* /github/${GITHUB_REPOSITORY}&&
+            mv /github/workspace /github/${GITHUB_REPOSITORY}&&
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
+            ls -la /github/workspace&&
             molecule test -s default"
 
   # platform_test_aws:
