@@ -172,7 +172,7 @@ jobs:
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
             cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
-            cp -R /github/workspace/.* /github/${GITHUB_REPOSITORY}&&
+            cp /github/workspace/.* /github/${GITHUB_REPOSITORY}&&
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
