@@ -128,7 +128,7 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './molecule/resources/provisioning'
-      # - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.04
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.05
       # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
       #   with:
       #     entrypoint: "pwd"
@@ -153,37 +153,33 @@ jobs:
       # - name: pwd
       #   run: echo GITHUB_REPOSITORY=$GITHUB_REPOSITORY
       # - name: start molecule in docker
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        # env:
-        #   ROLE_SUB_PATH:
-        #   GITHUB_WORKSPACE: /home/runner/work
-        #   GITHUB_ACTION: "false"
-        with:
-          # path: /home/runner/work
-          # entrypoint: molecule
-          # GITHUB_ACTIONS: "false"
-          # args: --debug test -s default
-          # working-directory: /home/runner/work
-          # args: |
-          #   /bin/sh -c "
-          #   mkdir -p /github/${GITHUB_REPOSITORY}&&
-          #   ls -la /github&&
-          #   cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
-          #   cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
-          #   cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
-          #   cd /github/${GITHUB_REPOSITORY}&&
-          #   pwd&&
-          #   ls -la&&
-          #   (ls -la /github/workspace||echo 'opa')&&
-          #   molecule test -s default"
-          args: |
-            /bin/sh -c "
-            mkdir -p /github/${GITHUB_REPOSITORY}&&
-            ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
-            cd /github/${GITHUB_REPOSITORY}/workspace&&
-            pwd&&
-            ls -la&&
-            molecule test -s default"
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   # env:
+      #   #   ROLE_SUB_PATH:
+      #   #   GITHUB_WORKSPACE: /home/runner/work
+      #   #   GITHUB_ACTION: "false"
+      #   with:
+      #     # path: /home/runner/work
+      #     # entrypoint: molecule
+      #     # GITHUB_ACTIONS: "false"
+      #     # args: --debug test -s default
+      #     # working-directory: /home/runner/work
+      #     args: |
+      #       /bin/sh -c "
+      #       mkdir -p /github/${GITHUB_REPOSITORY}&&
+      #       cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
+      #       cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
+      #       cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
+      #       cd /github/${GITHUB_REPOSITORY}&&
+      #       molecule test -s default"
+      #     # args: |
+      #     #   /bin/sh -c "
+      #     #   mkdir -p /github/${GITHUB_REPOSITORY}&&
+      #     #   ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
+      #     #   cd /github/${GITHUB_REPOSITORY}/workspace&&
+      #     #   pwd&&
+      #     #   ls -la&&
+      #     #   molecule test -s default"
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
