@@ -164,7 +164,14 @@ jobs:
           # GITHUB_ACTIONS: "false"
           # args: --debug test -s default
           # working-directory: /home/runner/work
-          args: /bin/sh -c "ls -la /github&&mv /github/workspace /github/$GITHUB_REPOSITORY&&cd /github/$GITHUB_REPOSITORY&&pwd&&ls -la&&molecule test -s default"
+          args: |
+            /bin/sh -c "ls -la /github&&
+            mkdir -p /github/$GITHUB_REPOSITORY&&
+            mv /github/workspace /github/$GITHUB_REPOSITORY&&
+            cd /github/$GITHUB_REPOSITORY&&
+            pwd&&
+            ls -la&&
+            molecule test -s default"
 
   # platform_test_aws:
   #   env:
