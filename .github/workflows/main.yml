@@ -136,8 +136,8 @@ jobs:
       #     args: './molecule/resources/provisioning -la'
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
-          entrypoint: molecule
-          args: '--help'
+          entrypoint: ./start.sh
+          # args: '--help'
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           entrypoint: molecule
