@@ -126,10 +126,10 @@ jobs:
       # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
       #   with:
       #     entrypoint: "pwd"
-      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-      #   with:
-      #     entrypoint: "ls"
-      #     args: '-la'
+      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+        with:
+          entrypoint: "ls"
+          args: '-la'
       # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
       #   with:
       #     entrypoint: "ls"
