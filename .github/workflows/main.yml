@@ -146,8 +146,8 @@ jobs:
         run: cd /home/runner/work
       - name: pwd
         run: pwd
-      - name: start molecule in docker
-        uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      # - name: start molecule in docker
+      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
           # path: /home/runner/work
           entrypoint: molecule
