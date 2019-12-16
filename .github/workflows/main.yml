@@ -130,10 +130,10 @@ jobs:
       # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
       #   with:
       #     entrypoint: "pwd"
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          entrypoint: "ls"
-          args: '-la'
+      # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+      #   with:
+      #     entrypoint: "ls"
+      #     args: '-la'
       # - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
       #   with:
       #     entrypoint: "ls"
@@ -142,10 +142,10 @@ jobs:
       #   with:
       #     entrypoint: ./start.sh
           # args: '--help'
-      - name: before_script
-        run: cd /home/runner/work
-      - name: pwd
-        run: pwd
+      # - name: before_script
+      #   run: cd /home/runner/work
+      # - name: pwd
+      #   run: pwd
       # - name: start molecule in docker
       - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
         with:
@@ -155,6 +155,7 @@ jobs:
           # working-directory: /home/runner/work
         env:
           GITHUB_WORKSPACE: /home/runner/work
+          GITHUB_ACTIONS: false
 
   # platform_test_aws:
   #   env:
