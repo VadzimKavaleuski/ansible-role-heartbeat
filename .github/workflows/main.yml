@@ -156,7 +156,7 @@ jobs:
           entrypoint: molecule
           args: --debug test -s default
           # working-directory: /home/runner/work
-  
+
   # platform_test_aws:
   #   env:
   #     AWS_ACCESS_KEY_ID: ${{secrets.aws_access_key_id}}
