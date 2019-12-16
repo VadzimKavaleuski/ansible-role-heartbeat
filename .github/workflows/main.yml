@@ -168,7 +168,7 @@ jobs:
             /bin/sh -c "ls -la /github&&
             mkdir -p /github/ansible-role-heartbeat&&
             ls -la /github&&
-            cp /github/workspace /github/ansible-role-heartbeat&&
+            cp /github/workspace/* /github/ansible-role-heartbeat/&&
             cd /github/ansible-role-heartbeat&&
             pwd&&
             ls -la&&
