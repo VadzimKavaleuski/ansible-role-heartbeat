@@ -170,7 +170,7 @@ jobs:
             ls -la /github&&
             mkdir -p /github/${GITHUB_ACTIONS}&&
             ls -la /github&&
-            cp /github/workspace/* /github/ansible-role-heartbeat/&&
+            cp -R /github/workspace/* /github/ansible-role-heartbeat/&&
             cd /github/ansible-role-heartbeat&&
             pwd&&
             ls -la&&
