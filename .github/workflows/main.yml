@@ -168,9 +168,9 @@ jobs:
             /bin/sh -c "ls -la /github&&
             mkdir -p /github/ansible-role-heartbeat&&
             ls -la /github&&
-            echo ${GITHUB_REPOSITORY
+            echo ${GITHUB_REPOSITORY}
             echo $GITHUB_REPOSITORY
-            mkdir -p \"/github/${GITHUB_REPOSITORY}\"&&
+            mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
             mv -R /github/workspace/* /github/ansible-role-heartbeat/&&
             cd /github/ansible-role-heartbeat&&
