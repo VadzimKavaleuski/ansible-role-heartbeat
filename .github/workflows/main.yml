@@ -169,7 +169,7 @@ jobs:
             mkdir -p /github/ansible-role-heartbeat&&
             ls -la /github&&
             echo ${GITHUB_ACTIONS}
-            $GITHUB_ACTIONS
+            echo $GITHUB_ACTIONS
             mkdir -p \"/github/${GITHUB_ACTIONS}\"&&
             ls -la /github&&
             mv-R /github/workspace/* /github/ansible-role-heartbeat/&&
