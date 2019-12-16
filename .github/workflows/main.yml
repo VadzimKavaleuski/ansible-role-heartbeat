@@ -172,7 +172,8 @@ jobs:
             mkdir -p /github/${GITHUB_REPOSITORY}&&
             ls -la /github&&
             cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
-            cp /github/workspace/.* /github/${GITHUB_REPOSITORY}&&
+            cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
+            cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
             cd /github/${GITHUB_REPOSITORY}&&
             pwd&&
             ls -la&&
