@@ -178,18 +178,19 @@ jobs:
           ls -la
       - uses: actions/checkout@v2
         with:
-          path: "./${{GITHUB_REPOSITORY}}"
+          path: ./${{github.repository}}
       - name: before_script 2
         run: rm -rf ./$GITHUB_REPOSITORY/molecule/resources/provisioning
         # run: rm -rf ./molecule/resources/provisioning
       - name: GITHUB_ACTIONS
         run: |
+          ls -la
           echo $GITHUB_ACTIONS
           echo $HOME
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
-          path: ./${{GITHUB_REPOSITORY}}/molecule/resources/provisioning
+          path: ./${{github.repository}}/molecule/resources/provisioning
           # path: './molecule/resources/provisioning'
       - name: before_script 3
         run: |
