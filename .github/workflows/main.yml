@@ -156,9 +156,9 @@ jobs:
           rm -rf ./molecule/resources/provisioning
           mkdir -p ./${GITHUB_REPOSITORY}
       - uses: actions/checkout@v2
-      with:
-        path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-    - name: GITHUB_ACTIONS
+        with:
+          path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
+      - name: GITHUB_ACTIONS
         run: echo $GITHUB_ACTIONS
       - uses: actions/checkout@v2
         with:
