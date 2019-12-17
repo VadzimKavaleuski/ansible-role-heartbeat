@@ -148,8 +148,12 @@ jobs:
 
   platform_test_container_with_action:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTIONS: "false"
     steps:
       - uses: actions/checkout@v2
+      - name: GITHUB_ACTIONS
+        run: echo $GITHUB_ACTIONS
       - name: before_script
         run: |
           rm -rf ./molecule/resources/provisioning
@@ -158,7 +162,7 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.06
+      - uses: VadzimKavaleuski/d1ble-ci-action@v1.06
 
 
   # platform_test_aws:
