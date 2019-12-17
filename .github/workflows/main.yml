@@ -209,7 +209,7 @@ jobs:
           echo 7
       - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
         working-directory: /
-    
+
 
   # platform_test_aws:
   #   env:
