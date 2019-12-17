@@ -154,17 +154,18 @@ jobs:
       - name: before_script
         run: |
           rm -rf ./molecule/resources/provisioning
-          mkdir -p ./${GITHUB_REPOSITORY}
+          # mkdir -p ./${GITHUB_REPOSITORY}
       - uses: actions/checkout@v2
-        with:
-          path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
+        # with:
+        #   path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
       - name: GITHUB_ACTIONS
         run: echo $GITHUB_ACTIONS
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
-          path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.05
+          path: './molecule/resources/provisioning'
+          # path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.07
 
 
   # platform_test_aws:
