@@ -207,7 +207,8 @@ jobs:
           echo 6
           pwd
           echo 7
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
+      - name: molecule
+        uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
         working-directory: /
 
 
