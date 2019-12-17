@@ -169,8 +169,8 @@ jobs:
 
   platform_test_container_with_action_1_08:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_ACTIONS: false
+    # env:
+    #   GITHUB_ACTIONS: false
     steps:
       - name: before_script 1
         run: mkdir -p ./${GITHUB_REPOSITORY}
@@ -191,9 +191,12 @@ jobs:
           # path: './molecule/resources/provisioning'
       - name: before_script 3
         run: |
-          ls
-          ls ./${GITHUB_REPOSITORY}
-          ls ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
+          echo 1
+          ls -la
+          echo 2
+          ls -la ./${GITHUB_REPOSITORY}
+          echo 3
+          ls - la ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
           pwd
           cd ../../..
           pwd
