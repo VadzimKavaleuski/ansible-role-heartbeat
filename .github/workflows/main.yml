@@ -162,7 +162,7 @@ jobs:
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-      - uses: VadzimKavaleuski/d1ble-ci-action@v1.06
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.06
 
 
   # platform_test_aws:
