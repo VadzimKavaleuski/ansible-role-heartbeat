@@ -182,8 +182,8 @@ jobs:
         # run: rm -rf ./molecule/resources/provisioning
       - name: GITHUB_ACTIONS
         run: |
-          echo ${{GITHUB_ACTIONS}}
-          echo ${{HOME}}
+          echo ${GITHUB_ACTIONS}
+          echo ${HOME}
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
