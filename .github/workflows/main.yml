@@ -4,15 +4,15 @@ name: CI
 on: [push]
 
 jobs:
-  # yamllint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: yaml-lint
-  #       uses: ibiqlik/action-yamllint@master
-  #       with:
-  #         file_or_dir: ./
-  #         config_file: .yamllint
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@master
+        with:
+          file_or_dir: ./
+          config_file: .yamllint
 
 #  ansible_lint:
 #    runs-on: ubuntu-latest
@@ -39,15 +39,15 @@ jobs:
 #          args: ". -c .ansible-lint --force-color"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
-  # ansible_lint_action:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         repository: 'lean-delivery/ansible-lint-rules'
-  #         path: './ansible-lint-rules'
-  #     - uses: VadzimKavaleuski/ansible-lint@v1.04
+  ansible_lint_action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'lean-delivery/ansible-lint-rules'
+          path: './ansible-lint-rules'
+      - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
 #  lint_check:
@@ -148,8 +148,9 @@ jobs:
 
   platform_test_container_with_action_1_07:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_ACTIONS: "false"
+    needs:
+      - yamllint
+      - ansible_lint_action
     steps:
       - name: before_script
         run: |
@@ -169,47 +170,21 @@ jobs:
 
   platform_test_container_with_action_1_08:
     runs-on: ubuntu-latest
-    # env:
-    #   GITHUB_ACTIONS: false
     steps:
       - name: before_script 1
-        run: |
-          mkdir -p ./$GITHUB_REPOSITORY
-          ls -la
+        run: mkdir -p ./$GITHUB_REPOSITORY
       - uses: actions/checkout@v2
         with:
           path: ./${{github.repository}}
       - name: before_script 2
         run: rm -rf ./$GITHUB_REPOSITORY/molecule/resources/provisioning
-        # run: rm -rf ./molecule/resources/provisioning
-      - name: GITHUB_ACTIONS
-        run: |
-          ls -la
-          echo $GITHUB_ACTIONS
-          echo $HOME
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: ./${{github.repository}}/molecule/resources/provisioning
-          # path: './molecule/resources/provisioning'
       - name: before_script 3
-        run: |
-          echo 1
-          ls -la
-          echo 2
-          ls -la ./$GITHUB_REPOSITORY
-          echo 3
-          ls -la ./$GITHUB_REPOSITORY/molecule/resources/provisioning
-          echo 4
-          pwd
-          echo 5
-          cd ../../..
-          echo 6
-          pwd
-          echo 7
       - name: molecule
         uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
-        # working-directory: /
 
 
   # platform_test_aws:
