@@ -109,42 +109,42 @@ jobs:
   #     - name: deployment test
   #       run: molecule test -s default
 
-  platform_test_container:
-    # needs:
-    #   - yamllint
-    #   - ansible_lint_action
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: before_script
-        run: rm -rf ./molecule/resources/provisioning
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-molecule-drivers'
-          path: './molecule/resources/provisioning'
-      - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
-        with:
-          # path: /home/runner/work
-          # entrypoint: molecule
-          # GITHUB_ACTIONS: "false"
-          # args: --debug test -s default
-          # working-directory: /home/runner/work
-          args: |
-            /bin/sh -c "
-            mkdir -p /github/${GITHUB_REPOSITORY}&&
-            cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
-            cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
-            cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
-            cd /github/${GITHUB_REPOSITORY}&&
-            molecule test -s default"
-          # args: |
-          #   /bin/sh -c "
-          #   mkdir -p /github/${GITHUB_REPOSITORY}&&
-          #   ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
-          #   cd /github/${GITHUB_REPOSITORY}/workspace&&
-          #   pwd&&
-          #   ls -la&&
-          #   molecule test -s default"
+  # platform_test_container:
+  #   # needs:
+  #   #   - yamllint
+  #   #   - ansible_lint_action
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: before_script
+  #       run: rm -rf ./molecule/resources/provisioning
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: 'lean-delivery/ansible-molecule-drivers'
+  #         path: './molecule/resources/provisioning'
+  #     - uses: docker://leandelivery/docker-ansible-ci:ansible-2.8
+  #       with:
+  #         # path: /home/runner/work
+  #         # entrypoint: molecule
+  #         # GITHUB_ACTIONS: "false"
+  #         # args: --debug test -s default
+  #         # working-directory: /home/runner/work
+  #         args: |
+  #           /bin/sh -c "
+  #           mkdir -p /github/${GITHUB_REPOSITORY}&&
+  #           cp -R /github/workspace/* /github/${GITHUB_REPOSITORY}&&
+  #           cp /github/workspace/.yamllint /github/${GITHUB_REPOSITORY}&&
+  #           cp /github/workspace/.ansible-lint /github/${GITHUB_REPOSITORY}&&
+  #           cd /github/${GITHUB_REPOSITORY}&&
+  #           molecule test -s default"
+  #         # args: |
+  #         #   /bin/sh -c "
+  #         #   mkdir -p /github/${GITHUB_REPOSITORY}&&
+  #         #   ln -s /github/workspace/ /github/${GITHUB_REPOSITORY}&&
+  #         #   cd /github/${GITHUB_REPOSITORY}/workspace&&
+  #         #   pwd&&
+  #         #   ls -la&&
+  #         #   molecule test -s default"
 
   platform_test_container_with_action:
     runs-on: ubuntu-latest
