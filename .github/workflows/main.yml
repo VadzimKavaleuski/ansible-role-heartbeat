@@ -173,30 +173,30 @@ jobs:
     #   GITHUB_ACTIONS: false
     steps:
       - name: before_script 1
-        run: mkdir -p ./${GITHUB_REPOSITORY}
+        run: mkdir -p ./$GITHUB_REPOSITORY
       - uses: actions/checkout@v2
         with:
-          path: ./${GITHUB_REPOSITORY}
+          path: ./$GITHUB_REPOSITORY
       - name: before_script 2
-        run: rm -rf ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
+        run: rm -rf ./$GITHUB_REPOSITORY/molecule/resources/provisioning
         # run: rm -rf ./molecule/resources/provisioning
       - name: GITHUB_ACTIONS
         run: |
-          echo ${GITHUB_ACTIONS}
-          echo ${HOME}
+          echo $GITHUB_ACTIONS
+          echo $HOME
       - uses: actions/checkout@v2
         with:
           repository: 'lean-delivery/ansible-molecule-drivers'
-          path: ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
+          path: ./$GITHUB_REPOSITORY/molecule/resources/provisioning
           # path: './molecule/resources/provisioning'
       - name: before_script 3
         run: |
           echo 1
           ls -la
           echo 2
-          ls -la ./${GITHUB_REPOSITORY}
+          ls -la ./$GITHUB_REPOSITORY
           echo 3
-          ls - la ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
+          ls - la ./$GITHUB_REPOSITORY/molecule/resources/provisioning
           pwd
           cd ../../..
           pwd
