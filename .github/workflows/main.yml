@@ -191,6 +191,7 @@ jobs:
           # path: './molecule/resources/provisioning'
       - name: before_script 3
         run: |
+          ls ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
           pwd
           cd ../../..
           pwd
