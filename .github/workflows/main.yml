@@ -173,7 +173,9 @@ jobs:
     #   GITHUB_ACTIONS: false
     steps:
       - name: before_script 1
-        run: mkdir -p ./$GITHUB_REPOSITORY
+        run: |
+          mkdir -p ./$GITHUB_REPOSITORY
+          ls -la
       - uses: actions/checkout@v2
         with:
           path: ./$GITHUB_REPOSITORY
