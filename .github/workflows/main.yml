@@ -4,15 +4,15 @@ name: CI
 on: [push]
 
 jobs:
-  yamllint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: yaml-lint
-        uses: ibiqlik/action-yamllint@master
-        with:
-          file_or_dir: ./
-          config_file: .yamllint
+  # yamllint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: yaml-lint
+  #       uses: ibiqlik/action-yamllint@master
+  #       with:
+  #         file_or_dir: ./
+  #         config_file: .yamllint
 
 #  ansible_lint:
 #    runs-on: ubuntu-latest
@@ -39,15 +39,15 @@ jobs:
 #          args: ". -c .ansible-lint --force-color"
           # entrypoint: "ansible-lint -v -c .ansible-lint ./"
 
-  ansible_lint_action:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-lint-rules'
-          path: './ansible-lint-rules'
-      - uses: VadzimKavaleuski/ansible-lint@v1.04
+  # ansible_lint_action:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: 'lean-delivery/ansible-lint-rules'
+  #         path: './ansible-lint-rules'
+  #     - uses: VadzimKavaleuski/ansible-lint@v1.04
 
 
 #  lint_check:
@@ -146,33 +146,33 @@ jobs:
   #         #   ls -la&&
   #         #   molecule test -s default"
 
-  platform_test_container_with_action_1_07:
-    runs-on: ubuntu-latest
-    needs:
-      - yamllint
-      - ansible_lint_action
-    steps:
-      - name: before_script
-        run: |
-          rm -rf ./molecule/resources/provisioning
-          # mkdir -p ./${GITHUB_REPOSITORY}
-      - uses: actions/checkout@v2
-        # with:
-        #   path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-      - name: GITHUB_ACTIONS
-        run: echo $GITHUB_ACTIONS
-      - uses: actions/checkout@v2
-        with:
-          repository: 'lean-delivery/ansible-molecule-drivers'
-          path: './molecule/resources/provisioning'
-          # path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
-      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.07
+  # platform_test_container_with_action_1_07:
+  #   needs:
+  #     - yamllint
+  #     - ansible_lint_action
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: before_script
+  #       run: |
+  #         rm -rf ./molecule/resources/provisioning
+  #         # mkdir -p ./${GITHUB_REPOSITORY}
+  #     - uses: actions/checkout@v2
+  #       # with:
+  #       #   path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
+  #     - name: GITHUB_ACTIONS
+  #       run: echo $GITHUB_ACTIONS
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: 'lean-delivery/ansible-molecule-drivers'
+  #         path: './molecule/resources/provisioning'
+  #         # path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
+  #     - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.07
 
   platform_test_container_with_action_1_08:
+    # needs:
+    #   - yamllint
+    #   - ansible_lint_action
     runs-on: ubuntu-latest
-    needs:
-      - yamllint
-      - ansible_lint_action
     steps:
       - name: before_script 1
         run: mkdir -p ./$GITHUB_REPOSITORY
