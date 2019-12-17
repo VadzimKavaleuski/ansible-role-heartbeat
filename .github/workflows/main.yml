@@ -170,11 +170,13 @@ jobs:
   platform_test_container_with_action_1_08:
     runs-on: ubuntu-latest
     env:
-      GITHUB_ACTIONS=false
+      GITHUB_ACTIONS: false
     steps:
       - name: before_script 1
         run: mkdir -p ./${GITHUB_REPOSITORY}
       - uses: actions/checkout@v2
+        with:
+          path: './${GITHUB_REPOSITORY}'
       - name: before_script 2
         run: rm -rf ./${GITHUB_REPOSITORY}/molecule/resources/provisioning
         # run: rm -rf ./molecule/resources/provisioning
