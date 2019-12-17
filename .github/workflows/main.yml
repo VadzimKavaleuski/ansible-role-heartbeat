@@ -186,8 +186,8 @@ jobs:
           repository: 'lean-delivery/ansible-molecule-drivers'
           path: ./${{github.repository}}/molecule/resources/provisioning
       - name: before_script 3
-      - name: molecule
-        uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
+      # - name: molecule
+      #   uses: VadzimKavaleuski/docker-ansible-ci-action@v1.08
 
 
   # platform_test_aws:
