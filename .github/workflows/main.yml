@@ -146,17 +146,17 @@ jobs:
           #   ls -la&&
           #   molecule test -s default"
 
-      platform_test_container:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v2
-          - name: before_script
-            run: rm -rf ./molecule/resources/provisioning
-          - uses: actions/checkout@v2
-            with:
-              repository: 'lean-delivery/ansible-molecule-drivers'
-              path: './molecule/resources/provisioning'
-          - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.05
+  platform_test_container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: before_script
+        run: rm -rf ./molecule/resources/provisioning
+      - uses: actions/checkout@v2
+        with:
+          repository: 'lean-delivery/ansible-molecule-drivers'
+          path: './molecule/resources/provisioning'
+      - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.05
     
   # platform_test_aws:
   #   env:
