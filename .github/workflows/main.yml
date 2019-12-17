@@ -146,7 +146,7 @@ jobs:
   #         #   ls -la&&
   #         #   molecule test -s default"
 
-  platform_test_container_with_action_1.07:
+  platform_test_container_with_action_1_07:
     runs-on: ubuntu-latest
     env:
       GITHUB_ACTIONS: "false"
@@ -167,7 +167,7 @@ jobs:
           # path: './${GITHUB_REPOSITORY}/molecule/resources/provisioning'
       - uses: VadzimKavaleuski/docker-ansible-ci-action@v1.07
 
-  platform_test_container_with_action_1.08:
+  platform_test_container_with_action_1_08:
     runs-on: ubuntu-latest
     env:
       GITHUB_ACTIONS: "false"
